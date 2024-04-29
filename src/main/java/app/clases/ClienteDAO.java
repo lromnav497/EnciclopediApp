@@ -13,7 +13,7 @@ public class ClienteDAO {
 	// Eliminar cliente
 	public static int removeCliente(int id, Connection con) {
 		try {
-			String sql = "DELETE FROM Avestruz WHERE id = ?";
+			String sql = "DELETE FROM clientes WHERE id = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			int rowsAffected = ps.executeUpdate();
@@ -28,13 +28,13 @@ public class ClienteDAO {
 	public static int insertCliente(ClienteDO cliente, Connection con) {
 		if (cliente == null || cliente.getNombre() == null || cliente.getApellido() == null
 				|| cliente.getFch_nac() == null || cliente.getCorreo() == null || cliente.getTelefono() == null
-				|| cliente.getPassword() == null || cliente.isAfiliado() == false || cliente.isAcept_publi() == false) {
-			return 0; // El objeto avestruz es nulo o no tiene datos en todos los campos
+				|| cliente.getPassword() == null) {
+			return 0; // El objeto cliente es nulo o no tiene datos en todos los campos
 		}
 
 		try {
 			// Comprobar si ya existe un registro con el mismo id en la base de datos
-			String checkSql = "SELECT * FROM clientes WHERE id = ?";
+			String checkSql = "SELECT * FROM clientes WHERE idclientes = ?";
 			PreparedStatement checkPs = con.prepareStatement(checkSql);
 			checkPs.setInt(1, cliente.getIdclientes());
 			ResultSet rs = checkPs.executeQuery();
@@ -47,7 +47,7 @@ public class ClienteDAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, cliente.getNombre());
 			ps.setString(2, cliente.getApellido());
-			ps.setString(3, cliente.getFch_nac());
+			ps.setDate(3, cliente.getFch_nac());
 			ps.setString(4, cliente.getCorreo());
 			ps.setString(5, cliente.getTelefono());
 			ps.setString(6, cliente.getPassword());
@@ -68,7 +68,7 @@ public class ClienteDAO {
 
 			boolean campoPrevio = false;
 			int numAff = -1;
-			String query = "UPDATE CLIENTE SET nombre = ?, apellido = ?, fch_nac = ?, correo = ?, telefono = ?, password = ?, afiliado = ?, acept_publi = ? WHERE idCliente = ?";
+			String query = "UPDATE clientes SET nombre = ?, apellido = ?, fch_nac = ?, correo = ?, telefono = ?, password = ?, afiliado = ?, acept_publi = ? WHERE idCliente = ?";
 
 			if (cliente.getNombre() != null || cliente.getApellido() != null || cliente.getFch_nac() != null
 					|| cliente.getCorreo() != null || cliente.getTelefono() != null || cliente.getPassword() != null
@@ -93,7 +93,7 @@ public class ClienteDAO {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new ClienteDO(rs.getInt("idclientes"), rs.getString("nombre"), rs.getString("apellido"),
-						rs.getString("fch_nac"), rs.getString("correo"), rs.getString("telefono"),
+						rs.getDate("fch_nac"), rs.getString("correo"), rs.getString("telefono"),
 						rs.getString("password"), rs.getBoolean("afiliado"), rs.getBoolean("acept_publi"));
 			} else {
 				return null;
@@ -123,5 +123,41 @@ public class ClienteDAO {
 		// Si no hay resultados, entonces el cliente no existe
 		return false;
 	}
+	// Buscar el telefono en la bd
+		public static boolean CheckTelefonoCliente(Connection con, String telefono) {
+			try {
+				String sql = "SELECT * FROM clientes WHERE telefono = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, telefono);
+				ResultSet rs = ps.executeQuery();
+
+				// Si hay un resultado, entonces el cliente existe
+				if (rs.next()) {
+					return true;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			// Si no hay resultados, entonces el cliente no existe
+			return false;
+		}
+		// Buscar el correo en la bd
+				public static boolean CheckCorreoCliente(Connection con, String correo) {
+					try {
+						String sql = "SELECT * FROM clientes WHERE correo = ?";
+						PreparedStatement ps = con.prepareStatement(sql);
+						ps.setString(1, correo);
+						ResultSet rs = ps.executeQuery();
+
+						// Si hay un resultado, entonces el cliente existe
+						if (rs.next()) {
+							return true;
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					// Si no hay resultados, entonces el cliente no existe
+					return false;
+				}
 
 }

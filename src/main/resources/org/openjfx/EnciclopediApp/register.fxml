@@ -10,12 +10,14 @@
     <TextField fx:id="nombre" promptText="Nombre" />
     <TextField fx:id="apellido" promptText="Apellido" />
     <DatePicker fx:id="fch_nac" promptText="Fecha de Nacimiento" />
+    <Label fx:id="errorLabel_correo" text="Ya existe un usuario con el mismo correo." textFill="RED" visible="false"/>
     <TextField fx:id="correo" promptText="Correo" />
+    <Label fx:id="errorLabel_telefono" text="Ya existe un usuario con el mismo telefono." textFill="RED" visible="false"/>
     <TextField fx:id="telefono" promptText="Teléfono" />
-    <Label fx:id="errorLabel" textFill="RED"/>
+    <Label fx:id="errorLabel_contrasena" text="Las contraseñas no coinciden." textFill="RED" visible="false"/>
     <PasswordField fx:id="contrasena" promptText="Contraseña" />
     <PasswordField fx:id="confirmarContrasena" promptText="Confirmar Contraseña" />
     <CheckBox fx:id="afiliado" text="Afiliado" />
     <CheckBox fx:id="aceptpubli" text="Aceptar Publicidad" />
-    <Button fx:id="registerButton" text="Registrarse" onAction="#registrar" />
+    <Button fx:id="registerButton" text="Registrarse" onAction="#registrar"/>
 </VBox>
