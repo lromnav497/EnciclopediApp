@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -18,8 +19,11 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		scene = new Scene(loadFXML("register"), 640, 480);
+        stage.setTitle("EnciclopediApp");
 		stage.setScene(scene);
 		stage.show();
+		Image image = new Image("img/logo.png");
+		stage.getIcons().add(image);
 	}
 
 	static void setRoot(String fxml) throws IOException {

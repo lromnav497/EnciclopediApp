@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
-    <Label text="Bienvenido a la Librería Digital" />
+    <Label text="Bienvenido a EnciclopediApp" />
     <Label text="Iniciar Sesión" />
     <TextField fx:id="loginCorreo" promptText="Correo" />
     <PasswordField fx:id="loginPassword" promptText="Contraseña" />
