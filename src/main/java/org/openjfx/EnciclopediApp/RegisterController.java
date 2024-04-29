@@ -38,7 +38,6 @@ public class RegisterController {
 
 		if (!password.equals(confirmPassword)) {
 			errorLabel.setText("Las contraseñas no coinciden");
-			errorLabel.setVisible(true);
 		} else {
 			// Procesar el registro
 		}
