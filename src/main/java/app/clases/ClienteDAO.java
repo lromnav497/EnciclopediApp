@@ -27,7 +27,7 @@ public class ClienteDAO {
 	// Insertar nuevos clientes
 	public static int insertCliente(ClienteDO cliente, Connection con) {
 		if (cliente == null || cliente.getNombre() == null || cliente.getApellido() == null
-				|| cliente.getFch_nac() == null || cliente.getCorreo() == null || cliente.getTelefono() == null
+				|| cliente.getFch_nac() == null || cliente.getCorreo() == null
 				|| cliente.getPassword() == null) {
 			return 0; // El objeto cliente es nulo o no tiene datos en todos los campos
 		}
