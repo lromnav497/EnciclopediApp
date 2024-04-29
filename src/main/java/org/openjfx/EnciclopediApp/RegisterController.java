@@ -15,7 +15,7 @@ public class RegisterController {
 	@FXML
 	private TextField apellido;
 	@FXML
-	private DatePicker fechaNacimiento;
+	private DatePicker fch_nac;
 	@FXML
 	private TextField correo;
 	@FXML
@@ -27,12 +27,12 @@ public class RegisterController {
 	@FXML
 	private CheckBox afiliado;
 	@FXML
-	private CheckBox aceptarPublicidad;
+	private CheckBox aceptpubli;
 	@FXML
 	private Label errorLabel;
 
 	@FXML
-	protected void handleRegisterButtonAction(ActionEvent event) {
+	protected void registrar(ActionEvent event) {
 		String password = contrasena.getText();
 		String confirmPassword = confirmarContrasena.getText();
 
