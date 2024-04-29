@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.Color?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
+    <Label text="Registro" />
+    <TextField fx:id="nombre" promptText="Nombre" />
+    <TextField fx:id="apellido" promptText="Apellido" />
+    <DatePicker fx:id="fch_nac" promptText="Fecha de Nacimiento" />
+    <TextField fx:id="correo" promptText="Correo" />
+    <TextField fx:id="telefono" promptText="Teléfono" />
+    <Label fx:id="errorLabel" textFill="RED"/>
+    <PasswordField fx:id="contrasena" promptText="Contraseña" />
+    <PasswordField fx:id="confirmarContrasena" promptText="Confirmar Contraseña" />
+    <CheckBox fx:id="afiliado" text="Afiliado" />
+    <CheckBox fx:id="acept_publi" text="Aceptar Publicidad" />
+    <Button fx:id="registerButton" text="Registrarse" />
+</VBox>
