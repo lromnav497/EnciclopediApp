@@ -1,22 +1,24 @@
 package app.clases;
 
+import java.sql.Date;
+
 public class ClienteDO {
 	private int idclientes;
 	private String nombre;
 	private String apellido;
-	private String fch_nac;
+	private Date fch_nac;
 	private String correo;
 	private String telefono;
 	private String password;
 	private boolean afiliado;
 	private boolean acept_publi;
-
+	
 	public ClienteDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public ClienteDO(int idclientes, String nombre, String apellido, String fch_nac, String correo, String telefono,
+	public ClienteDO(int idclientes, String nombre, String apellido, Date fch_nac, String correo, String telefono,
 			String password, boolean afiliado, boolean acept_publi) {
 		super();
 		this.idclientes = idclientes;
@@ -54,11 +56,11 @@ public class ClienteDO {
 		this.apellido = apellido;
 	}
 
-	public String getFch_nac() {
+	public Date getFch_nac() {
 		return fch_nac;
 	}
 
-	public void setFch_nac(String fch_nac) {
+	public void setFch_nac(Date fch_nac) {
 		this.fch_nac = fch_nac;
 	}
 
@@ -101,5 +103,5 @@ public class ClienteDO {
 	public void setAcept_publi(boolean acept_publi) {
 		this.acept_publi = acept_publi;
 	}
-
+	
 }
