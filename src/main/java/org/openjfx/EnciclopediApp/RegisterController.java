@@ -111,7 +111,6 @@ public class RegisterController {
 				errorLabel_info.setVisible(false);
 				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true) {
 					Date fecha_nac_format = Date.valueOf(fch_nac.getValue());
-<<<<<<< HEAD
 					System.out.println("bien.");
 					// Cierra la ventana de registro
 				    Node source = (Node) event.getSource();
@@ -121,12 +120,10 @@ public class RegisterController {
 				    // Abre la ventana principal
 				    App_principal mainApp = new App_principal();
 				    mainApp.showMainWindow();
-=======
 					ClienteDO cliente = new ClienteDO(0, name, surname, fecha_nac_format, email, phone, password,
 							afiliate, acept_publi);
 					int funcionInsertar = ClienteDAO.insertCliente(cliente, con);
 					System.out.println("Se han insertado " + funcionInsertar + " columnas");
->>>>>>> 393801bc77140ee8c9ef998a6a2411b24bc40ce9
 				} else {
 
 				}
