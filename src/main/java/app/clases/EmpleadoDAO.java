@@ -11,42 +11,52 @@ public class EmpleadoDAO {
 	
 	public static final int ERROR_SQL_BORRAR = -1;
 	
-	//El metodo Eliminar sirve para borrar a un empleado de la BD
-		public static int removeEmpleado(Connection con, int idEmpleado) {
+	// Eliminar empleado
+		public static int removeEmpleado(int id, Connection con) {
 			try {
-				Statement stmt = con.createStatement();
-				
-				int numAff = stmt.executeUpdate("DELETE FROM EMPLEADO WHERE idEmpleado= " + idEmpleado);
-				
-				return numAff;
+				String sql = "DELETE FROM empleados WHERE idempleados = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, id);
+				int rowsAffected = ps.executeUpdate();
+				return rowsAffected > 0 ? 0 : -1;
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return ERROR_SQL_BORRAR;
 			}
 		}
 		
-		//El metodo Insertar sirve para introducir nuevos empleados
-		public static int insertEmpleado(Connection con, EmpleadoDO empleado) {
+		// Insertar nuevos clientes
+		public static int insertEmpleado(EmpleadoDO empleado, Connection con) {
+			if (empleado == null || empleado.getNombre() == null || empleado.getApellido() == null
+					|| empleado.getFch_nac() == null || empleado.getCorreo() == null || empleado.getTelefono() == null || empleado.getPassword() == null || empleado.getPuesto() == null) {
+				return 0; // El objeto cliente es nulo o no tiene datos en todos los campos
+			}
+
 			try {
-				int numAff = ERROR_SQL_BORRAR;
-				String query = "INSERT INTO cliente (nombre, apellido, fch_nac, correo, telefono, password, puesto) VALUES(?,?,?,?,?,?,?)";
-				
-				PreparedStatement pstmt = con.prepareStatement(query);
-				
-				pstmt.setString(1, empleado.getNombre());
-				pstmt.setString(2, empleado.getApellido());
-				pstmt.setString(3, empleado.getFch_nac());
-				pstmt.setString(4, empleado.getCorreo());
-				pstmt.setString(5, empleado.getTelefono());
-				pstmt.setString(6, empleado.getPassword());
-				pstmt.setString(7, empleado.getPuesto());
-				
-				numAff = pstmt.executeUpdate(query);
-				return numAff;
+				// Comprobar si ya existe un registro con el mismo id en la base de datos
+				String checkSql = "SELECT * FROM empleados WHERE idempleados = ?";
+				PreparedStatement checkPs = con.prepareStatement(checkSql);
+				checkPs.setInt(1, empleado.getIdempleados());
+				ResultSet rs = checkPs.executeQuery();
+				if (rs.next()) {
+					return 0; // Ya existe un registro con el mismo id
+				}
+
+				// Insertar el registro
+				String sql = "INSERT INTO empleados (nombre, apellido, fch_nac, correo, telefono, password, puesto) VALUES(?,?,?,?,?,?,?)";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, empleado.getNombre());
+				ps.setString(2, empleado.getApellido());
+				ps.setDate(3, empleado.getFch_nac());
+				ps.setString(4, empleado.getCorreo());
+				ps.setString(5, empleado.getTelefono());
+				ps.setString(6, empleado.getPassword());
+				ps.setString(7, empleado.getPuesto());
+				int rowsAffected = ps.executeUpdate();
+				return rowsAffected > 0 ? 1 : 0;
 			} catch (SQLException e) {
-				// TODO: handle exception
 				e.printStackTrace();
-				return ERROR_SQL_BORRAR;
+				return 0;
 			}
 		}
 		
@@ -71,20 +81,21 @@ public class EmpleadoDAO {
 			}
 		}
 		
-		//El metodo Cargar sirve para subir nuevos empleados a la BD
-		public static ResultSet loadEmpleado(Connection con, int idEmpleado) {
+		// Cargar todos los datos del cliente con la id
+		public static EmpleadoDO loadEmpleado(Connection con, int id) {
 			try {
-				String query = "SELECT * FROM EMPLEADO WHERE idEmpleado=?";
-				
-				PreparedStatement pstmt = con.prepareStatement(query);
-				
-				pstmt.setInt(1, idEmpleado);
-				
-				ResultSet rs = pstmt.executeQuery();
-				
-				return rs;
+				String sql = "SELECT * FROM empleados WHERE idempleados = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, id);
+				ResultSet rs = ps.executeQuery();
+				if (rs.next()) {
+					return new EmpleadoDO(rs.getInt("idempleados"), rs.getString("nombre"), rs.getString("apellido"),
+							rs.getDate("fch_nac"), rs.getString("correo"), rs.getString("telefono"),
+							rs.getString("password"), rs.getString("puesto"));
+				} else {
+					return null;
+				}
 			} catch (SQLException e) {
-				//TODO Auto-generated catch block
 				e.printStackTrace();
 				return null;
 			}

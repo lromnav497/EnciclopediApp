@@ -9,11 +9,13 @@ import app.clases.ClienteDAO;
 import app.utils.ConectarBD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class RegisterController {
 
@@ -106,6 +108,14 @@ public class RegisterController {
 				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true) {
 					Date fecha_nac_format = Date.valueOf(fch_nac.getValue());
 					System.out.println("bien.");
+					// Cierra la ventana de registro
+				    Node source = (Node) event.getSource();
+				    Stage stage = (Stage) source.getScene().getWindow();
+				    stage.close();
+
+				    // Abre la ventana principal
+				    App_principal mainApp = new App_principal();
+				    mainApp.showMainWindow();
 				} else {
 
 				}

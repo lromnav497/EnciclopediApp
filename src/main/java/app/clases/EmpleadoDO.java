@@ -1,10 +1,12 @@
 package app.clases;
 
+import java.sql.Date;
+
 public class EmpleadoDO {
 	private int idempleados;
 	private String nombre;
 	private String apellido;
-	private String fch_nac;
+	private Date fch_nac;
 	private String correo;
 	private String telefono;
 	private String password;
@@ -15,7 +17,7 @@ public class EmpleadoDO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public EmpleadoDO(int idempleados, String nombre, String apellido, String fch_nac, String correo, String telefono,
+	public EmpleadoDO(int idempleados, String nombre, String apellido, Date fch_nac, String correo, String telefono,
 			String password, String puesto) {
 		super();
 		this.idempleados = idempleados;
@@ -52,11 +54,11 @@ public class EmpleadoDO {
 		this.apellido = apellido;
 	}
 
-	public String getFch_nac() {
+	public Date getFch_nac() {
 		return fch_nac;
 	}
 
-	public void setFch_nac(String fch_nac) {
+	public void setFch_nac(Date fch_nac) {
 		this.fch_nac = fch_nac;
 	}
 
