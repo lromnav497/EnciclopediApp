@@ -1,3 +1,1 @@
-leyendo: <a href="https://www.flaticon.es/iconos-gratis/libro" title="libro iconos">Libro iconos creados por mangsaabguru - Flaticon</a>
-libro: <a href="https://www.flaticon.es/iconos-gratis/libro" title="libro iconos">Libro iconos creados por Freepik - Flaticon</a>
-motivacion: <a href="https://www.flaticon.es/iconos-gratis/motivacion" title="motivacion iconos">Motivacion iconos creados por Freepik - Flaticon</a>
+logo: <a href="https://www.flaticon.es/iconos-gratis/libro" title="libro iconos">Libro iconos creados por mangsaabguru - Flaticon</a>

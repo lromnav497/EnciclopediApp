@@ -3,9 +3,9 @@ package org.openjfx.EnciclopediApp;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import app.clases.ClienteDAO;
-import app.clases.ClienteDO;
 import app.utils.ConectarBD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,6 +43,8 @@ public class RegisterController {
 	private Label errorLabel_contrasena;
 	@FXML
 	private Label errorLabel_fecha;
+	@FXML
+	private Label errorLabel_info;
 
 	@FXML
 	protected void registrar(ActionEvent event) {
@@ -51,9 +53,11 @@ public class RegisterController {
 		boolean[] comprobaciones = new boolean[3];
 
 		try {
+			String fecha_nac = "";
+
 			String name = nombre.getText();
 			String surname = apellido.getText();
-			Date fecha_nac = Date.valueOf(fch_nac.getValue());
+			LocalDate fecha_nac_local = fch_nac.getValue();
 			String email = correo.getText();
 			String phone = telefono.getText();
 			String password = contrasena.getText();
@@ -64,12 +68,8 @@ public class RegisterController {
 			boolean existeCorreoCliente = ClienteDAO.CheckCorreoCliente(con, email);
 			boolean existeTelefonoCliente = ClienteDAO.CheckTelefonoCliente(con, phone);
 
-			if (fch_nac != null) {
-				errorLabel_fecha.setVisible(true);
-				comprobaciones[1] = false;
-			} else {
-				errorLabel_fecha.setVisible(false);
-				comprobaciones[1] = true;
+			if (fecha_nac_local != null) {
+				fecha_nac = fecha_nac_local.toString();
 			}
 
 			if (existeCorreoCliente) {
@@ -94,14 +94,33 @@ public class RegisterController {
 			} else {
 				comprobaciones[2] = true;
 				errorLabel_contrasena.setVisible(false);
+			}
+
+			if (name.isEmpty() || surname.isEmpty() || fecha_nac.isEmpty() || email.isEmpty() || password.isEmpty()
+					|| confirmPassword.isEmpty()) {
+				// Muestra un mensaje de error para indicar que los campos son obligatorios
+				errorLabel_info.setVisible(true);
+				System.out.println("Todos los campos son obligatorios excepto el teléfono.");
+			} else {
+				errorLabel_info.setVisible(false);
 				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true) {
-					ClienteDO cliente = new ClienteDO(0, name, surname, fecha_nac, email, phone, password, afiliate,
-							acept_publi);
-					int funcionInsertar = ClienteDAO.insertCliente(cliente, con);
-					System.out.println("Se han insertado " + funcionInsertar + " columnas");
-					System.out.println("BIEN HECHO! :D");
+					Date fecha_nac_format = Date.valueOf(fch_nac.getValue());
+					System.out.println("bien.");
+				} else {
+
 				}
 			}
+
+			/**
+			 * if (comprobaciones[0] == true && comprobaciones[1] == true &&
+			 * comprobaciones[2] == true) { Date fecha_nac_format =
+			 * Date.valueOf(fch_nac.getValue());
+			 * 
+			 * ClienteDO cliente = new ClienteDO(0, name, surname, fecha_nac_format, email,
+			 * phone, password, afiliate, acept_publi); int funcionInsertar =
+			 * ClienteDAO.insertCliente(cliente, con); System.out.println("Se han insertado
+			 * " + funcionInsertar + " columnas"); System.out.println("BIEN HECHO! :D"); } }
+			 **/
 			con.close();
 		} catch (SQLException e) {
 			// TODO: handle exception

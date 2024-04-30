@@ -20,5 +20,6 @@
     <PasswordField fx:id="confirmarContrasena" promptText="Confirmar Contraseña" />
     <CheckBox fx:id="afiliado" text="Afiliado" />
     <CheckBox fx:id="aceptpubli" text="Aceptar Publicidad" />
+    <Label fx:id="errorLabel_info" text="Todos los campos son obligatorios excepto el teléfono." textFill="RED" visible="false"/>
     <Button fx:id="registerButton" text="Registrarse" onAction="#registrar"/>
 </VBox>
