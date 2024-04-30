@@ -13,7 +13,7 @@ public class ClienteDAO {
 	// Eliminar cliente
 	public static int removeCliente(int id, Connection con) {
 		try {
-			String sql = "DELETE FROM clientes WHERE id = ?";
+			String sql = "DELETE FROM clientes WHERE idclientes = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			int rowsAffected = ps.executeUpdate();
@@ -27,8 +27,7 @@ public class ClienteDAO {
 	// Insertar nuevos clientes
 	public static int insertCliente(ClienteDO cliente, Connection con) {
 		if (cliente == null || cliente.getNombre() == null || cliente.getApellido() == null
-				|| cliente.getFch_nac() == null || cliente.getCorreo() == null
-				|| cliente.getPassword() == null) {
+				|| cliente.getFch_nac() == null || cliente.getCorreo() == null || cliente.getPassword() == null) {
 			return 0; // El objeto cliente es nulo o no tiene datos en todos los campos
 		}
 
@@ -87,7 +86,7 @@ public class ClienteDAO {
 	// Cargar todos los datos del cliente con la id
 	public static ClienteDO loadCliente(Connection con, int id) {
 		try {
-			String sql = "SELECT * FROM clientes WHERE id = ?";
+			String sql = "SELECT * FROM clientes WHERE idclientes = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
@@ -123,41 +122,43 @@ public class ClienteDAO {
 		// Si no hay resultados, entonces el cliente no existe
 		return false;
 	}
+
 	// Buscar el telefono en la bd
-		public static boolean CheckTelefonoCliente(Connection con, String telefono) {
-			try {
-				String sql = "SELECT * FROM clientes WHERE telefono = ?";
-				PreparedStatement ps = con.prepareStatement(sql);
-				ps.setString(1, telefono);
-				ResultSet rs = ps.executeQuery();
+	public static boolean CheckTelefonoCliente(Connection con, String telefono) {
+		try {
+			String sql = "SELECT * FROM clientes WHERE telefono = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, telefono);
+			ResultSet rs = ps.executeQuery();
 
-				// Si hay un resultado, entonces el cliente existe
-				if (rs.next()) {
-					return true;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+			// Si hay un resultado, entonces el cliente existe
+			if (rs.next()) {
+				return true;
 			}
-			// Si no hay resultados, entonces el cliente no existe
-			return false;
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		// Buscar el correo en la bd
-				public static boolean CheckCorreoCliente(Connection con, String correo) {
-					try {
-						String sql = "SELECT * FROM clientes WHERE correo = ?";
-						PreparedStatement ps = con.prepareStatement(sql);
-						ps.setString(1, correo);
-						ResultSet rs = ps.executeQuery();
+		// Si no hay resultados, entonces el cliente no existe
+		return false;
+	}
 
-						// Si hay un resultado, entonces el cliente existe
-						if (rs.next()) {
-							return true;
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
-					// Si no hay resultados, entonces el cliente no existe
-					return false;
-				}
+	// Buscar el correo en la bd
+	public static boolean CheckCorreoCliente(Connection con, String correo) {
+		try {
+			String sql = "SELECT * FROM clientes WHERE correo = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, correo);
+			ResultSet rs = ps.executeQuery();
+
+			// Si hay un resultado, entonces el cliente existe
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// Si no hay resultados, entonces el cliente no existe
+		return false;
+	}
 
 }

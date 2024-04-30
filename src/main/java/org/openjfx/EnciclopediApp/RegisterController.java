@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 
+import app.clases.ClienteDAO;
+import app.clases.ClienteDO;
+import app.utils.ConectarBD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -11,9 +14,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import app.clases.ClienteDAO;
-import app.clases.ClienteDO;
-import app.utils.ConectarBD;
 
 public class RegisterController {
 
@@ -41,13 +41,15 @@ public class RegisterController {
 	private Label errorLabel_telefono;
 	@FXML
 	private Label errorLabel_contrasena;
+	@FXML
+	private Label errorLabel_fecha;
 
 	@FXML
 	protected void registrar(ActionEvent event) {
 		Connection con = ConectarBD.conectarBD();
-		
+
 		boolean[] comprobaciones = new boolean[3];
-		
+
 		try {
 			String name = nombre.getText();
 			String surname = apellido.getText();
@@ -61,7 +63,15 @@ public class RegisterController {
 
 			boolean existeCorreoCliente = ClienteDAO.CheckCorreoCliente(con, email);
 			boolean existeTelefonoCliente = ClienteDAO.CheckTelefonoCliente(con, phone);
-			
+
+			if (fch_nac != null) {
+				errorLabel_fecha.setVisible(true);
+				comprobaciones[1] = false;
+			} else {
+				errorLabel_fecha.setVisible(false);
+				comprobaciones[1] = true;
+			}
+
 			if (existeCorreoCliente) {
 				errorLabel_correo.setVisible(true);
 				comprobaciones[0] = false;
@@ -69,7 +79,7 @@ public class RegisterController {
 				errorLabel_correo.setVisible(false);
 				comprobaciones[0] = true;
 			}
-			
+
 			if (existeTelefonoCliente) {
 				errorLabel_telefono.setVisible(true);
 				comprobaciones[1] = false;
@@ -77,7 +87,7 @@ public class RegisterController {
 				errorLabel_telefono.setVisible(false);
 				comprobaciones[1] = true;
 			}
-			
+
 			if (!password.equals(confirmPassword)) {
 				errorLabel_contrasena.setVisible(true);
 				comprobaciones[2] = false;
@@ -85,7 +95,8 @@ public class RegisterController {
 				comprobaciones[2] = true;
 				errorLabel_contrasena.setVisible(false);
 				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true) {
-					ClienteDO cliente = new ClienteDO(0,name, surname, fecha_nac, email, phone, password,afiliate,acept_publi);
+					ClienteDO cliente = new ClienteDO(0, name, surname, fecha_nac, email, phone, password, afiliate,
+							acept_publi);
 					int funcionInsertar = ClienteDAO.insertCliente(cliente, con);
 					System.out.println("Se han insertado " + funcionInsertar + " columnas");
 					System.out.println("BIEN HECHO! :D");

@@ -9,6 +9,7 @@
     <Label text="Registro" />
     <TextField fx:id="nombre" promptText="Nombre" />
     <TextField fx:id="apellido" promptText="Apellido" />
+    <Label fx:id="errorLabel_fecha" text="Introduze una fecha de nacimiento valida." textFill="RED" visible="false"/>
     <DatePicker fx:id="fch_nac" promptText="Fecha de Nacimiento" />
     <Label fx:id="errorLabel_correo" text="Ya existe un usuario con el mismo correo." textFill="RED" visible="false"/>
     <TextField fx:id="correo" promptText="Correo" />

@@ -19,8 +19,8 @@ public class App extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		scene = new Scene(loadFXML("register"), 640, 480);
-		stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/libro.png")));
-        stage.setTitle("EnciclopediApp");
+		stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
+		stage.setTitle("EnciclopediApp");
 		stage.setScene(scene);
 		stage.show();
 	}
