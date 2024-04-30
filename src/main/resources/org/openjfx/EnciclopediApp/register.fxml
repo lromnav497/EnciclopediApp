@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.Color?>
 
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EnciclopediApp.RegisterController" styleClass="register-form">
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EnciclopediApp.RegisterController" stylesheets="@../../../estilos/prueba.css">
     <Label text="Registro" styleClass="title-label"/>
     <TextField fx:id="nombre" promptText="Nombre" />
     <TextField fx:id="apellido" promptText="Apellido" />

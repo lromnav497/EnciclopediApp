@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="org.openjfx.EnciclopediApp.LoginController" stylesheets="@../../../estilos/prueba.css">
     <Label text="Bienvenido a EnciclopediApp" />
     <Label text="Iniciar Sesión" />
     <TextField fx:id="loginCorreo" promptText="Correo" />
