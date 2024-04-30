@@ -5,21 +5,21 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.Color?>
 
-<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EnciclopediApp.RegisterController">
-    <Label text="Registro" />
+<VBox spacing="10" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EnciclopediApp.RegisterController" styleClass="register-form">
+    <Label text="Registro" styleClass="title-label"/>
     <TextField fx:id="nombre" promptText="Nombre" />
     <TextField fx:id="apellido" promptText="Apellido" />
-    <Label fx:id="errorLabel_fecha" text="Introduze una fecha de nacimiento valida." textFill="RED" visible="false"/>
+    <Label fx:id="errorLabel_fecha" text="Introduze una fecha de nacimiento valida." styleClass="error-label" visible="false"/>
     <DatePicker fx:id="fch_nac" promptText="Fecha de Nacimiento" />
-    <Label fx:id="errorLabel_correo" text="Ya existe un usuario con el mismo correo." textFill="RED" visible="false"/>
+    <Label fx:id="errorLabel_correo" text="Ya existe un usuario con el mismo correo." styleClass="error-label" visible="false"/>
     <TextField fx:id="correo" promptText="Correo" />
-    <Label fx:id="errorLabel_telefono" text="Ya existe un usuario con el mismo telefono." textFill="RED" visible="false"/>
+    <Label fx:id="errorLabel_telefono" text="Ya existe un usuario con el mismo telefono." styleClass="error-label" visible="false"/>
     <TextField fx:id="telefono" promptText="Teléfono" />
-    <Label fx:id="errorLabel_contrasena" text="Las contraseñas no coinciden." textFill="RED" visible="false"/>
+    <Label fx:id="errorLabel_contrasena" text="Las contraseñas no coinciden." styleClass="error-label" visible="false"/>
     <PasswordField fx:id="contrasena" promptText="Contraseña" />
     <PasswordField fx:id="confirmarContrasena" promptText="Confirmar Contraseña" />
     <CheckBox fx:id="afiliado" text="Afiliado" />
     <CheckBox fx:id="aceptpubli" text="Aceptar Publicidad" />
-    <Label fx:id="errorLabel_info" text="Todos los campos son obligatorios excepto el teléfono." textFill="RED" visible="false"/>
-    <Button fx:id="registerButton" text="Registrarse" onAction="#registrar"/>
+    <Label fx:id="errorLabel_info" text="Todos los campos son obligatorios excepto el teléfono." styleClass="error-label" visible="false"/>
+    <Button fx:id="registerButton" text="Registrarse" onAction="#registrar" styleClass="register-button"/>
 </VBox>
