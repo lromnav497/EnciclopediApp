@@ -56,7 +56,7 @@ public class RegisterController {
 		Connection con = ConectarBD.conectarBD();
 
 		// Guarda las 3 comprobacion necesarias para seguir
-		boolean[] comprobaciones = new boolean[3];
+		boolean[] comprobaciones = new boolean[4];
 
 		try {
 			// Inicializar las variables obtenidas del formulario
@@ -94,12 +94,20 @@ public class RegisterController {
 				errorLabel_telefono.setVisible(false);
 				comprobaciones[1] = true;
 			}
-
-			if (!password.equals(confirmPassword)) {
-				errorLabel_contrasena.setVisible(true);
+			
+			if (fecha_nac.isEmpty()) {
+				errorLabel_fecha.setVisible(true);
 				comprobaciones[2] = false;
 			} else {
+				errorLabel_fecha.setVisible(false);
 				comprobaciones[2] = true;
+			}
+			
+			if (!password.equals(confirmPassword)) {
+				errorLabel_contrasena.setVisible(true);
+				comprobaciones[3] = false;
+			} else {
+				comprobaciones[3] = true;
 				errorLabel_contrasena.setVisible(false);
 			}
 
@@ -109,7 +117,7 @@ public class RegisterController {
 				errorLabel_info.setVisible(true);
 			} else {
 				errorLabel_info.setVisible(false);
-				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true) {
+				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true && comprobaciones[3] == true) {
 					Date fecha_nac_format = Date.valueOf(fch_nac.getValue());
 					System.out.println("bien.");
 					// Cierra la ventana de registro

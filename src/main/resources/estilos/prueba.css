@@ -1,72 +1,22 @@
-.title-label {
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-}
-
-.error-label {
-    -fx-text-fill: red;
-}
-
-.register-button {
-    -fx-background-color: #ff7f50;
-    -fx-text-fill: white;
-}
-
-.label {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-}
-
-.button {
-    -fx-background-color: #007bff;
-    -fx-text-fill: white;
-    -fx-font-size: 16px;
-}
-
-.button:hover {
-    -fx-background-color: #0056b3;
-}
-
-.text-field, .password-field {
-    -fx-pref-width: 200px;
-}
+/* Estilos generales */
 .root {
+    -fx-font-family: 'Arial';
     -fx-background-image: url('../img/background.png');
     -fx-background-repeat: stretch;   
     -fx-background-size: cover;
     -fx-background-position: center center;
 }
 
-/* Estilos generales */
-.root {
-    -fx-font-family: 'Arial';
-}
-
-/* Estilo del contenedor principal */
-.v-box {
-    -fx-background-color: rgba(255, 255, 255, 0.9);
-    -fx-background-radius: 10;
-    -fx-padding: 40;
-    -fx-pref-width: 300;
-    -fx-max-width: 100%;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 4, 0, 0, 10);
-}
-
-.v-box:hover {
-    -fx-scale-x: 1.05;
-    -fx-scale-y: 1.05;
-}
-
 /* Estilos de los títulos y etiquetas de error */
 .title-label {
     -fx-font-size: 24px;
-    -fx-text-fill: #333;
     -fx-margin-bottom: 20;
 }
 
 .error-label {
-    -fx-font-size: 14px;
-    -fx-text-fill: #e74c3c;
+    -fx-font-size: 12px;
+    -fx-text-fill: #ff0000;
+    -fx-font-weight: bold; /* Hacer el texto en negrita */
     -fx-visibility: false; /* Ocultar inicialmente */
 }
 
@@ -74,8 +24,6 @@
 .text-field, .password-field {
     -fx-border-color: #ccc;
     -fx-border-radius: 5;
-    -fx-padding: 10;
-    -fx-pref-width: 100%;
     -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.1), 1, 0.0, 0, 3);
 }
 
@@ -88,16 +36,9 @@
     -fx-text-fill: white;
     -fx-border-color: transparent;
     -fx-border-radius: 5;
-    -fx-padding: 10 20;
     -fx-cursor: hand;
 }
 
 .register-button:hover {
     -fx-background-color: #8DC26F;
-}
-
-/* Estilos de los CheckBox */
-.check-box {
-    -fx-text-fill: #333;
-    -fx-margin-bottom: 10;
 }
