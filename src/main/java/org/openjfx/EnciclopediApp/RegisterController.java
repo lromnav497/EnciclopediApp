@@ -94,7 +94,7 @@ public class RegisterController {
 				errorLabel_telefono.setVisible(false);
 				comprobaciones[1] = true;
 			}
-			
+
 			if (fecha_nac.isEmpty()) {
 				errorLabel_fecha.setVisible(true);
 				comprobaciones[2] = false;
@@ -102,7 +102,7 @@ public class RegisterController {
 				errorLabel_fecha.setVisible(false);
 				comprobaciones[2] = true;
 			}
-			
+
 			if (!password.equals(confirmPassword)) {
 				errorLabel_contrasena.setVisible(true);
 				comprobaciones[3] = false;
@@ -117,17 +117,18 @@ public class RegisterController {
 				errorLabel_info.setVisible(true);
 			} else {
 				errorLabel_info.setVisible(false);
-				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true && comprobaciones[3] == true) {
+				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true
+						&& comprobaciones[3] == true) {
 					Date fecha_nac_format = Date.valueOf(fch_nac.getValue());
 					System.out.println("bien.");
 					// Cierra la ventana de registro
-				    Node source = (Node) event.getSource();
-				    Stage stage = (Stage) source.getScene().getWindow();
-				    stage.close();
+					Node source = (Node) event.getSource();
+					Stage stage = (Stage) source.getScene().getWindow();
+					stage.close();
 
-				    // Abre la ventana principal
-				    App_principal mainApp = new App_principal();
-				    mainApp.showMainWindow();
+					// Abre la ventana principal
+					App_principal mainApp = new App_principal();
+					mainApp.showMainWindow();
 					ClienteDO cliente = new ClienteDO(0, name, surname, fecha_nac_format, email, phone, password,
 							afiliate, acept_publi);
 					int funcionInsertar = ClienteDAO.insertCliente(cliente, con);
