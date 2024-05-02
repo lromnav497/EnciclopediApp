@@ -20,6 +20,8 @@ import javafx.stage.Stage;
 
 public class LoginController {
 
+	private UserProperties userProperties = new UserProperties();
+	
 	@FXML
 	private TextField loginCorreo;
 	@FXML
@@ -36,10 +38,11 @@ public class LoginController {
 			String correo = loginCorreo.getText();
 			String password = loginPassword.getText();
 
-			boolean usuarioExiste = ClienteDAO.CheckCliente(con, correo, password);
+			boolean usuarioExiste = ClienteDAO.checkCliente(con, correo, password);
 
 			if (usuarioExiste) {
 				errorLabel.setVisible(false);
+				userProperties.saveUserDetails(correo, "prueba", true);
 				// Cierra la ventana de inicio
 				Node source = (Node) event.getSource();
 				Stage stage = (Stage) source.getScene().getWindow();
@@ -72,6 +75,7 @@ public class LoginController {
 			newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
 			newstage.setTitle("EnciclopediApp");
 			newstage.setScene(new Scene(root));
+			newstage.setResizable(false);
 			newstage.show();
 		} catch (IOException e) {
 			e.printStackTrace();

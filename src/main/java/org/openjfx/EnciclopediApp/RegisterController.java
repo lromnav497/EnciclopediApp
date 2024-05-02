@@ -72,8 +72,8 @@ public class RegisterController {
 			boolean afiliate = afiliado.isSelected();
 			boolean acept_publi = aceptpubli.isSelected();
 
-			boolean existeCorreoCliente = ClienteDAO.CheckCorreoCliente(con, email);
-			boolean existeTelefonoCliente = ClienteDAO.CheckTelefonoCliente(con, phone);
+			boolean existeCorreoCliente = ClienteDAO.checkCorreoCliente(con, email);
+			boolean existeTelefonoCliente = ClienteDAO.checkTelefonoCliente(con, phone);
 
 			if (fecha_nac_local != null) {
 				fecha_nac = fecha_nac_local.toString();

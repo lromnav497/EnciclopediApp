@@ -12,17 +12,21 @@ import javafx.stage.Stage;
 /**
  * JavaFX App
  */
-public class App extends Application {
+public class App_inicio extends Application {
 
 	private static Scene scene;
-
+	private UserProperties userProperties = new UserProperties();
+	
 	@Override
 	public void start(Stage stage) throws IOException {
-		scene = new Scene(loadFXML("login"), 640, 480);
+		userProperties.loadUserDetails();
+		String initialScene = userProperties.isLoggedIn() ? "register" : "login";
+		scene = new Scene(loadFXML(initialScene), 549, 358);
 		scene.getStylesheets().addAll(this.getClass().getResource("/estilos/prueba.css").toExternalForm());
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
 		stage.setTitle("EnciclopediApp");
 		stage.setScene(scene);
+		stage.setResizable(false);
 		stage.show();
 	}
 
@@ -31,7 +35,7 @@ public class App extends Application {
 	}
 
 	private static Parent loadFXML(String fxml) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(App_inicio.class.getResource(fxml + ".fxml"));
 		return fxmlLoader.load();
 	}
 

@@ -8,8 +8,6 @@ import java.sql.Statement;
 
 public class ClienteDAO {
 
-	public static final int ERROR_SQL = -1;
-
 	// Eliminar cliente
 	public static int removeCliente(int id, Connection con) {
 		try {
@@ -20,7 +18,7 @@ public class ClienteDAO {
 			return rowsAffected > 0 ? 0 : -1;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return ERROR_SQL;
+			return -1;
 		}
 	}
 
@@ -81,7 +79,7 @@ public class ClienteDAO {
 	}
 
 	// Buscar el cliente en la bd
-	public static boolean CheckCliente(Connection con, String correo, String password) {
+	public static boolean checkCliente(Connection con, String correo, String password) {
 		try {
 			String sql = "SELECT * FROM clientes WHERE correo = ? AND password = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -101,7 +99,7 @@ public class ClienteDAO {
 	}
 
 	// Buscar el telefono en la bd
-	public static boolean CheckTelefonoCliente(Connection con, String telefono) {
+	public static boolean checkTelefonoCliente(Connection con, String telefono) {
 		try {
 			String sql = "SELECT * FROM clientes WHERE telefono = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -120,7 +118,7 @@ public class ClienteDAO {
 	}
 
 	// Buscar el correo en la bd
-	public static boolean CheckCorreoCliente(Connection con, String correo) {
+	public static boolean checkCorreoCliente(Connection con, String correo) {
 		try {
 			String sql = "SELECT * FROM clientes WHERE correo = ?";
 			PreparedStatement ps = con.prepareStatement(sql);

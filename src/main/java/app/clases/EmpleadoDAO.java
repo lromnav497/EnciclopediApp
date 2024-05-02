@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 public class EmpleadoDAO {
 	
-	public static final int ERROR_SQL_BORRAR = -1;
-	
 	// Eliminar empleado
 		public static int removeEmpleado(int id, Connection con) {
 			try {
@@ -21,7 +19,7 @@ public class EmpleadoDAO {
 				return rowsAffected > 0 ? 0 : -1;
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return ERROR_SQL_BORRAR;
+				return -1;
 			}
 		}
 		

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 public class PedidoDAO {
 	
-	public static final int ERROR_SQL_BORRAR = -1;
-	
 	// Eliminar pedido
 		public static int removePedido(int id, Connection con) {
 			try {
@@ -21,7 +19,7 @@ public class PedidoDAO {
 				return rowsAffected > 0 ? 0 : -1;
 			} catch (SQLException e) {
 				e.printStackTrace();
-				return ERROR_SQL_BORRAR;
+				return -1;
 			}
 		}
 

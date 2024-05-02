@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../estilos/prueba.css" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EnciclopediApp.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="358.0" prefWidth="549.0" stylesheets="@../../../estilos/prueba.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EnciclopediApp.LoginController">
    <left>
-      <AnchorPane prefHeight="400.0" prefWidth="242.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="358.0" prefWidth="169.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="195.0" fitWidth="222.0" layoutX="58.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="195.0" fitWidth="222.0" layoutX="58.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/logo.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="76.0" fitWidth="282.0" layoutX="14.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="76.0" fitWidth="282.0" layoutX="14.0" layoutY="274.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/logo_name.png" />
                </image>
@@ -28,18 +28,18 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="403.0" prefWidth="402.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="358.0" prefWidth="15.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="82.0" layoutY="93.0" styleClass="title-label" text="Iniciar Sesión" textFill="WHITE" />
-            <TextField fx:id="loginCorreo" layoutX="78.0" layoutY="138.0" promptText="Correo" />
-            <PasswordField fx:id="loginPassword" layoutX="78.0" layoutY="169.0" promptText="Contraseña" />
-            <Button fx:id="loginButton" layoutX="107.0" layoutY="225.0" onAction="#login" prefHeight="35.0" prefWidth="91.0" styleClass="register-button" text="Iniciar Sesión" textFill="WHITE" />
-            <Label fx:id="errorLabel" layoutX="58.0" layoutY="200.0" prefHeight="15.0" prefWidth="194.0" text="La contraseña o correo es erroneo" textFill="RED" visible="false">
+            <Label alignment="CENTER" layoutX="48.0" layoutY="60.0" prefHeight="36.0" prefWidth="172.0" styleClass="title-label" text="Iniciar Sesión" textFill="WHITE" />
+            <TextField fx:id="loginCorreo" layoutX="36.0" layoutY="112.0" prefHeight="25.0" prefWidth="180.0" promptText="Correo" />
+            <PasswordField fx:id="loginPassword" layoutX="35.0" layoutY="144.0" prefHeight="25.0" prefWidth="180.0" promptText="Contraseña" />
+            <Button fx:id="loginButton" layoutX="82.0" layoutY="185.0" onAction="#login" prefHeight="35.0" prefWidth="91.0" styleClass="register-button" text="Iniciar Sesión" textFill="WHITE" />
+            <Label fx:id="errorLabel" layoutX="30.0" layoutY="211.0" prefHeight="15.0" prefWidth="194.0" text="La contraseña o correo es erroneo" textFill="RED" visible="false">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <Label layoutX="143.0" layoutY="266.0" styleClass="title-label" text="O" textFill="WHITE" />
-            <Button fx:id="registerButton" layoutX="108.0" layoutY="300.0" prefHeight="35.0" prefWidth="91.0" onAction="#open_register" styleClass="register-button" text="Registrarse" textFill="WHITE" />
+            <Label layoutX="118.0" layoutY="228.0" styleClass="title-label" text="O" textFill="WHITE" />
+            <Button fx:id="registerButton" layoutX="82.0" layoutY="264.0" onAction="#open_register" prefHeight="35.0" prefWidth="91.0" styleClass="register-button" text="Registrarse" textFill="WHITE" />
          </children>
       </AnchorPane>
    </right>
