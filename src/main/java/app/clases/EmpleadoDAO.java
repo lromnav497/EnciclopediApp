@@ -25,7 +25,7 @@ public class EmpleadoDAO {
 			}
 		}
 		
-		// Insertar nuevos clientes
+		// Insertar nuevos empleados
 		public static int insertEmpleado(EmpleadoDO empleado, Connection con) {
 			if (empleado == null || empleado.getNombre() == null || empleado.getApellido() == null
 					|| empleado.getFch_nac() == null || empleado.getCorreo() == null || empleado.getTelefono() == null || empleado.getPassword() == null || empleado.getPuesto() == null) {
@@ -57,27 +57,6 @@ public class EmpleadoDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return 0;
-			}
-		}
-		
-		//El metodo Actualizar sirve para refrescar la informacion sobre los empleados
-		public static int updateEmpleado(Connection con, EmpleadoDO empleado) {
-			try {
-				Statement stmt = con.createStatement();
-				
-				boolean campoPrevio = false;
-				int numAff = -1;
-				String query = "UPDATE EMPLEADO SET nombre = ?, apellido = ?, fch_nac = ?, correo = ?, telefono = ?, password = ?, puesto = ? WHERE idEmpleado = ?";
-				
-				if(empleado.getNombre() != null || empleado.getApellido() != null || empleado.getFch_nac() != null || empleado.getCorreo() != null || empleado.getTelefono() != null || empleado.getPassword() != null || empleado.getPuesto() != null) {
-					return 0;
-				}
-				
-				return numAff;
-			} catch (SQLException e) {
-				//TODO: handle exception
-				e.printStackTrace();
-				return ERROR_SQL_BORRAR;
 			}
 		}
 		

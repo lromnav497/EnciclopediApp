@@ -1,11 +1,13 @@
 package app.clases;
 
+import java.sql.Date;
+
 public class ValoracionDO {
 	private int idvaloraciones;
 	private int puntaje;
 	private boolean recomendado;
 	private String comentario;
-	private String fch_publi;
+	private Date fch_publi;
 	private int clientes_idclientes;
 
 	public ValoracionDO() {
@@ -13,7 +15,7 @@ public class ValoracionDO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ValoracionDO(int idvaloraciones, int puntaje, boolean recomendado, String comentario, String fch_publi,
+	public ValoracionDO(int idvaloraciones, int puntaje, boolean recomendado, String comentario, Date fch_publi,
 			int clientes_idclientes) {
 		super();
 		this.idvaloraciones = idvaloraciones;
@@ -56,11 +58,11 @@ public class ValoracionDO {
 		this.comentario = comentario;
 	}
 
-	public String getFch_publi() {
+	public Date getFch_publi() {
 		return fch_publi;
 	}
 
-	public void setFch_publi(String fch_publi) {
+	public void setFch_publi(Date fch_publi) {
 		this.fch_publi = fch_publi;
 	}
 

@@ -11,79 +11,68 @@ public class PedidoDAO {
 	
 	public static final int ERROR_SQL_BORRAR = -1;
 	
-	//El metodo Eliminar sirve para borrar un pedido de la BD
-			public static int removePedido(Connection con, int idPedido) {
-				try {
-					Statement stmt = con.createStatement();
-					
-					int numAff = stmt.executeUpdate("DELETE FROM PEDIDO WHERE idPedido= " + idPedido);
-					
-					return numAff;
-				} catch (SQLException e) {
-					e.printStackTrace();
-					return ERROR_SQL_BORRAR;
-				}
+	// Eliminar pedido
+		public static int removePedido(int id, Connection con) {
+			try {
+				String sql = "DELETE FROM pedidos WHERE idpedidos = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, id);
+				int rowsAffected = ps.executeUpdate();
+				return rowsAffected > 0 ? 0 : -1;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return ERROR_SQL_BORRAR;
 			}
-			
-			//El metodo Insertar sirve para introducir nuevos pedidos
-			public static int insertPedido(Connection con, PedidoDO pedido) {
-				try {
-					int numAff = ERROR_SQL_BORRAR;
-					String query = "INSERT INTO pedido (contenido, fch_compra, total_precio) VALUES(?,?,?)";
-					
-					PreparedStatement pstmt = con.prepareStatement(query);
-					
-					pstmt.setString(1, pedido.getContenido());
-					pstmt.setString(2, pedido.getFch_compra());
-					pstmt.setDouble(3, pedido.getTotal_precio());
-					
-					numAff = pstmt.executeUpdate(query);
-					return numAff;
-				} catch (SQLException e) {
-					// TODO: handle exception
-					e.printStackTrace();
-					return ERROR_SQL_BORRAR;
-				}
+		}
+
+		// Insertar nuevos pedidos
+		public static int insertPedido(PedidoDO pedido, Connection con) {
+			if (pedido == null || pedido.getContenido() == null
+					|| pedido.getFch_compra() == null || pedido.getTotal_precio() == -1) {
+				return 0; // El objeto cliente es nulo o no tiene datos en todos los campos
 			}
-			
-			//El metodo Actualizar sirve para refrescar la informacion sobre los pedidos
-			public static int updatePedido(Connection con, PedidoDO pedido) {
-				try {
-					Statement stmt = con.createStatement();
-					
-					boolean campoPrevio = false;
-					int numAff = -1;
-					String query = "UPDATE PEDIDO SET contenido = ?, fch_compra = ?, total_precio = ? WHERE idPedido = ?";
-					
-					if(pedido.getContenido() != null || pedido.getFch_compra() != null || pedido.getTotal_precio() != 0.0) {
-						return 0;
-					}
-					
-					return numAff;
-				} catch (SQLException e) {
-					//TODO: handle exception
-					e.printStackTrace();
-					return ERROR_SQL_BORRAR;
+
+			try {
+				// Comprobar si ya existe un registro con el mismo id en la base de datos
+				String checkSql = "SELECT * FROM pedidos WHERE idpedidos = ?";
+				PreparedStatement checkPs = con.prepareStatement(checkSql);
+				checkPs.setInt(1, pedido.getIdpedidos());
+				ResultSet rs = checkPs.executeQuery();
+				if (rs.next()) {
+					return 0; // Ya existe un registro con el mismo id
 				}
+
+				// Insertar el registro
+				String sql = "INSERT INTO pedidos (contenido, fch_compra, total_precio) VALUES(?,?,?)";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, pedido.getContenido());
+				ps.setDate(2, pedido.getFch_compra());
+				ps.setDouble(3, pedido.getTotal_precio());
+				int rowsAffected = ps.executeUpdate();
+				return rowsAffected > 0 ? 1 : 0;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return 0;
 			}
-			
-			//El metodo Cargar sirve para subir nuevos pedidos a la BD
-			public static ResultSet loadPedido(Connection con, int idPedido) {
-				try {
-					String query = "SELECT * FROM PEDIDO WHERE idPedido=?";
-					
-					PreparedStatement pstmt = con.prepareStatement(query);
-					
-					pstmt.setInt(1, idPedido);
-					
-					ResultSet rs = pstmt.executeQuery();
-					
-					return rs;
-				} catch (SQLException e) {
-					//TODO Auto-generated catch block
-					e.printStackTrace();
+		}
+
+		// Cargar todos los datos del cliente con la id
+		public static PedidoDO loadPedido(Connection con, int id) {
+			try {
+				String sql = "SELECT * FROM pedidos WHERE idpedidos = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, id);
+				ResultSet rs = ps.executeQuery();
+				if (rs.next()) {
+					return new PedidoDO(rs.getInt("idpedidos"), rs.getString("contenido"),
+							rs.getDate("fch_compra"), rs.getDouble("total_precio"));
+				} else {
 					return null;
 				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
 			}
+		}
 	
 }

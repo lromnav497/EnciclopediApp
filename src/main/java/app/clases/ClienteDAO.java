@@ -60,29 +60,6 @@ public class ClienteDAO {
 		}
 	}
 
-	// El metodo Actualizar sirve para refrescar la informacion sobre los clientes
-	public static int updateCliente(Connection con, ClienteDO cliente) {
-		try {
-			Statement stmt = con.createStatement();
-
-			boolean campoPrevio = false;
-			int numAff = -1;
-			String query = "UPDATE clientes SET nombre = ?, apellido = ?, fch_nac = ?, correo = ?, telefono = ?, password = ?, afiliado = ?, acept_publi = ? WHERE idCliente = ?";
-
-			if (cliente.getNombre() != null || cliente.getApellido() != null || cliente.getFch_nac() != null
-					|| cliente.getCorreo() != null || cliente.getTelefono() != null || cliente.getPassword() != null
-					|| cliente.isAfiliado() != false || cliente.isAcept_publi() != false) {
-				return 0;
-			}
-
-			return numAff;
-		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return ERROR_SQL;
-		}
-	}
-
 	// Cargar todos los datos del cliente con la id
 	public static ClienteDO loadCliente(Connection con, int id) {
 		try {
@@ -131,14 +108,14 @@ public class ClienteDAO {
 			ps.setString(1, telefono);
 			ResultSet rs = ps.executeQuery();
 
-			// Si hay un resultado, entonces el cliente existe
+			// Si hay un resultado, entonces el telefono existe
 			if (rs.next()) {
 				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// Si no hay resultados, entonces el cliente no existe
+		// Si no hay resultados, entonces el telefono no existe
 		return false;
 	}
 
@@ -150,14 +127,14 @@ public class ClienteDAO {
 			ps.setString(1, correo);
 			ResultSet rs = ps.executeQuery();
 
-			// Si hay un resultado, entonces el cliente existe
+			// Si hay un resultado, entonces el correo existe
 			if (rs.next()) {
 				return true;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		// Si no hay resultados, entonces el cliente no existe
+		// Si no hay resultados, entonces el correo no existe
 		return false;
 	}
 

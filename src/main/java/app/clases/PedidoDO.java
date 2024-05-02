@@ -1,9 +1,11 @@
 package app.clases;
 
+import java.sql.Date;
+
 public class PedidoDO {
 	private int idpedidos;
 	private String contenido;
-	private String fch_compra;
+	private Date fch_compra;
 	private double total_precio;
 
 	public PedidoDO() {
@@ -11,7 +13,7 @@ public class PedidoDO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PedidoDO(int idpedidos, String contenido, String fch_compra, double total_precio) {
+	public PedidoDO(int idpedidos, String contenido, Date fch_compra, double total_precio) {
 		super();
 		this.idpedidos = idpedidos;
 		this.contenido = contenido;
@@ -35,11 +37,11 @@ public class PedidoDO {
 		this.contenido = contenido;
 	}
 
-	public String getFch_compra() {
+	public Date getFch_compra() {
 		return fch_compra;
 	}
 
-	public void setFch_compra(String fch_compra) {
+	public void setFch_compra(Date fch_compra) {
 		this.fch_compra = fch_compra;
 	}
 

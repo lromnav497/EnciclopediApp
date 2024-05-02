@@ -1,19 +1,21 @@
 package app.clases;
 
+import java.sql.Date;
+
 public class LibroDO {
 	private int idlibros;
 	private String nombre;
 	private String categoria;
 	private String autor;
 	private String editorial;
-	private String fch_publi;
+	private Date fch_publi;
 
 	public LibroDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public LibroDO(int idlibros, String nombre, String categoria, String autor, String editorial, String fch_publi) {
+	public LibroDO(int idlibros, String nombre, String categoria, String autor, String editorial, Date fch_publi) {
 		super();
 		this.idlibros = idlibros;
 		this.nombre = nombre;
@@ -63,11 +65,11 @@ public class LibroDO {
 		this.editorial = editorial;
 	}
 
-	public String getFch_publi() {
+	public Date getFch_publi() {
 		return fch_publi;
 	}
 
-	public void setFch_publi(String fch_publi) {
+	public void setFch_publi(Date fch_publi) {
 		this.fch_publi = fch_publi;
 	}
 
