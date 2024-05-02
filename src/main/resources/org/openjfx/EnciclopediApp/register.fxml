@@ -38,6 +38,7 @@
             <Label fx:id="errorLabel_fecha" layoutX="25.0" layoutY="96.0" styleClass="error-label" text="Introduze una fecha de nacimiento valida." visible="false" />
             <DatePicker fx:id="fch_nac" layoutX="76.0" layoutY="112.0" prefHeight="25.0" prefWidth="157.0" promptText="Fecha de Nacimiento" />
             <Label fx:id="errorLabel_correo" layoutX="25.0" layoutY="137.0" styleClass="error-label" text="Ya existe un usuario con el mismo correo." visible="false" />
+            <Label fx:id="errorLabel_correo2" layoutX="25.0" layoutY="137.0" styleClass="error-label" text="Introduzca un correo valido." visible="false" />
             <TextField fx:id="correo" layoutX="77.0" layoutY="153.0" promptText="Correo" />
             <Label fx:id="errorLabel_telefono" layoutX="20.0" layoutY="180.0" styleClass="error-label" text="Ya existe un usuario con el mismo telefono." visible="false" />
             <TextField fx:id="telefono" layoutX="76.0" layoutY="196.0" promptText="Teléfono" />

@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import app.clases.ClienteDAO;
 import app.clases.ClienteDO;
 import app.utils.ConectarBD;
+import app.utils.UserProperties;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -19,7 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class RegisterController {
-
+	
+	private UserProperties userProperties = new UserProperties();
+	
 	// Obtener los valores del formulario
 	@FXML
 	private TextField nombre;
@@ -41,6 +44,8 @@ public class RegisterController {
 	private CheckBox aceptpubli;
 	@FXML
 	private Label errorLabel_correo;
+	@FXML
+	private Label errorLabel_correo2;
 	@FXML
 	private Label errorLabel_telefono;
 	@FXML
@@ -78,14 +83,20 @@ public class RegisterController {
 			if (fecha_nac_local != null) {
 				fecha_nac = fecha_nac_local.toString();
 			}
-
-			if (existeCorreoCliente) {
-				errorLabel_correo.setVisible(true);
+			
+			if (comprobarCorreo(email)) {
+				errorLabel_correo2.setVisible(false);
+				if (existeCorreoCliente) {
+					errorLabel_correo.setVisible(true);
+					comprobaciones[0] = false;
+				} else {
+					errorLabel_correo.setVisible(false);
+					comprobaciones[0] = true;
+				}
+		    } else {
+		    	errorLabel_correo2.setVisible(true);
 				comprobaciones[0] = false;
-			} else {
-				errorLabel_correo.setVisible(false);
-				comprobaciones[0] = true;
-			}
+		    }
 
 			if (existeTelefonoCliente && phone != "") {
 				errorLabel_telefono.setVisible(true);
@@ -120,7 +131,7 @@ public class RegisterController {
 				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true
 						&& comprobaciones[3] == true) {
 					Date fecha_nac_format = Date.valueOf(fch_nac.getValue());
-					System.out.println("bien.");
+					userProperties.saveUserDetails(email, "prueba", true);
 					// Cierra la ventana de registro
 					Node source = (Node) event.getSource();
 					Stage stage = (Stage) source.getScene().getWindow();
@@ -142,4 +153,16 @@ public class RegisterController {
 			// TODO: handle exception
 		}
 	}
+	
+	private boolean comprobarCorreo(String correo) {
+	    String regex = "^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)*(\\.[a-zA-Z]{2,})$";
+	    if (correo.matches(regex)) {
+	        // El correo electrónico es válido
+	        return true;
+	    } else {
+	        // El correo electrónico no es válido
+	        return false;
+	    }
+	}
+
 }

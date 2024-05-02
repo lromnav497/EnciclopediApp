@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import app.clases.ClienteDAO;
 import app.utils.ConectarBD;
+import app.utils.UserProperties;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

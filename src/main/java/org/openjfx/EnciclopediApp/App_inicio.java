@@ -2,6 +2,7 @@ package org.openjfx.EnciclopediApp;
 
 import java.io.IOException;
 
+import app.utils.UserProperties;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
