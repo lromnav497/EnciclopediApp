@@ -55,7 +55,7 @@ public class RegisterController {
 		// Conectar con la bd
 		Connection con = ConectarBD.conectarBD();
 
-		// Guarda las 3 comprobacion necesarias para seguir
+		// Guarda las 3 comprobaciones necesarias para seguir
 		boolean[] comprobaciones = new boolean[4];
 
 		try {
