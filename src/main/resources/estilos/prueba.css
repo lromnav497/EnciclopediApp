@@ -1,0 +1,44 @@
+/* Estilos generales */
+.root {
+    -fx-font-family: 'Arial';
+    -fx-background-image: url('../img/background.png');
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+/* Estilos de los títulos y etiquetas de error */
+.title-label {
+    -fx-font-size: 24px;
+    -fx-margin-bottom: 20;
+}
+
+.error-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #ff0000;
+    -fx-font-weight: bold; /* Hacer el texto en negrita */
+    -fx-visibility: false; /* Ocultar inicialmente */
+}
+
+/* Estilos de los campos de texto y botones */
+.text-field, .password-field {
+    -fx-border-color: #ccc;
+    -fx-border-radius: 5;
+    -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.1), 1, 0.0, 0, 3);
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #76b852;
+}
+
+.register-button {
+    -fx-background-color: #76b852;
+    -fx-text-fill: white;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-cursor: hand;
+}
+
+.register-button:hover {
+    -fx-background-color: #8DC26F;
+}

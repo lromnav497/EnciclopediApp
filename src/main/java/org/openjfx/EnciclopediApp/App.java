@@ -18,7 +18,8 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		scene = new Scene(loadFXML("register"), 640, 480);
+		scene = new Scene(loadFXML("login"), 640, 480);
+		scene.getStylesheets().addAll(this.getClass().getResource("/estilos/prueba.css").toExternalForm());
 		stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
 		stage.setTitle("EnciclopediApp");
 		stage.setScene(scene);
