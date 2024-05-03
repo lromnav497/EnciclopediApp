@@ -8,14 +8,24 @@ public class LibroDO {
 	private String categoria;
 	private String autor;
 	private String editorial;
+<<<<<<< Updated upstream
 	private Date fch_publi;
+=======
+	private String fch_publi;
+	private String imagen;
+>>>>>>> Stashed changes
 
 	public LibroDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+<<<<<<< Updated upstream
 	public LibroDO(int idlibros, String nombre, String categoria, String autor, String editorial, Date fch_publi) {
+=======
+	public LibroDO(int idlibros, String nombre, String categoria, String autor, String editorial, String fch_publi,
+			String imagen) {
+>>>>>>> Stashed changes
 		super();
 		this.idlibros = idlibros;
 		this.nombre = nombre;
@@ -23,6 +33,7 @@ public class LibroDO {
 		this.autor = autor;
 		this.editorial = editorial;
 		this.fch_publi = fch_publi;
+		this.imagen = imagen;
 	}
 
 	public int getIdlibros() {
@@ -71,6 +82,14 @@ public class LibroDO {
 
 	public void setFch_publi(Date fch_publi) {
 		this.fch_publi = fch_publi;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 }
