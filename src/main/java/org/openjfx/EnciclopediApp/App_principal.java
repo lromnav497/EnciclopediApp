@@ -52,11 +52,8 @@ public class App_principal {
 		MenuBar menuBar = new MenuBar();
 		VBox.setVgrow(menuBar, Priority.NEVER);
 
-		Menu fileMenu = new Menu("File");
-		fileMenu.getItems().addAll(new MenuItem("New"), new MenuItem("Open…"), new Menu("Open Recent"),
-				new SeparatorMenuItem(), new MenuItem("Close"), new MenuItem("Save"), new MenuItem("Save As…"),
-				new MenuItem("Revert"), new SeparatorMenuItem(), new MenuItem("Preferences…"), new SeparatorMenuItem(),
-				new MenuItem("Quit"));
+		Menu fileMenu = new Menu("Perfil");
+		
 
 		Menu editMenu = new Menu("Edit");
 		editMenu.getItems().addAll(new MenuItem("Undo"), new MenuItem("Redo"), new SeparatorMenuItem(),
@@ -65,7 +62,6 @@ public class App_principal {
 
 		MenuItem logoutItem = new MenuItem("Log Out");
 		logoutItem.setOnAction(e -> {
-			System.out.println("Algo");
 			try {
 				primaryStage.close();
 				// Abre la ventana principal
