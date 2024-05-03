@@ -27,7 +27,7 @@ public class LibroDAO {
 	// Insertar nuevos libros
 	public static int insertLibro(LibroDO libro, Connection con) {
 		if (libro == null || libro.getNombre() == null || libro.getCategoria() == null || libro.getAutor() == null
-				|| libro.getEditorial() == null || libro.getFch_publi() == null) {
+				|| libro.getEditorial() == null || libro.getFch_publi() == null || libro.getPrecio() == null) {
 			return 0; // El objeto cliente es nulo o no tiene datos en todos los campos
 		}
 
@@ -42,13 +42,15 @@ public class LibroDAO {
 			}
 
 			// Insertar el registro
-			String sql = "INSERT INTO libros (nombre, categoria, autor, editorial, fch_publi) VALUES(?,?,?,?,?)";
+			String sql = "INSERT INTO libros (nombre, categoria, autor, editorial, fch_publi, precio, imagen) VALUES(?,?,?,?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, libro.getNombre());
 			ps.setString(2, libro.getCategoria());
 			ps.setString(3, libro.getAutor());
 			ps.setString(4, libro.getEditorial());
 			ps.setDate(5, libro.getFch_publi());
+			ps.setDouble(6, libro.getPrecio());
+			ps.setString(7, libro.getImagen());
 			int rowsAffected = ps.executeUpdate();
 			return rowsAffected > 0 ? 1 : 0;
 		} catch (SQLException e) {
@@ -66,7 +68,7 @@ public class LibroDAO {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new LibroDO(rs.getInt("idlibros"), rs.getString("nombre"), rs.getString("categoria"),
-						rs.getString("autor"), rs.getString("editorial"), rs.getDate("fch_publi"),
+						rs.getString("autor"), rs.getString("editorial"), rs.getDate("fch_publi"), rs.getDouble("precio"),
 						rs.getString("imagen"));
 			} else {
 				return null;
@@ -89,8 +91,6 @@ public class LibroDAO {
 				libro.setNombre(rs.getString("nombre"));
 				libro.setAutor(rs.getString("autor"));
 				libro.setCategoria(rs.getString("categoria"));
-				// Para la imagen, necesitarás tener el path o URL de la imagen en tu base de
-				// datos
 				libro.setImagen(rs.getString("imagen"));
 				libros.add(libro);
 			}

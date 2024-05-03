@@ -9,16 +9,16 @@ public class LibroDO {
 	private String autor;
 	private String editorial;
 	private Date fch_publi;
+	private Double precio;
 	private String imagen;
-
+	
 	public LibroDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
 	public LibroDO(int idlibros, String nombre, String categoria, String autor, String editorial, Date fch_publi,
-			String imagen) {
-
+			Double precio, String imagen) {
 		super();
 		this.idlibros = idlibros;
 		this.nombre = nombre;
@@ -26,6 +26,7 @@ public class LibroDO {
 		this.autor = autor;
 		this.editorial = editorial;
 		this.fch_publi = fch_publi;
+		this.precio = precio;
 		this.imagen = imagen;
 	}
 
@@ -75,6 +76,14 @@ public class LibroDO {
 
 	public void setFch_publi(Date fch_publi) {
 		this.fch_publi = fch_publi;
+	}
+
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
 	}
 
 	public String getImagen() {
