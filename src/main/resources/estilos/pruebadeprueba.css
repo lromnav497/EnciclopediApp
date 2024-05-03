@@ -1,21 +1,27 @@
 .root {
-    -fx-font-family: "Arial";
-    -fx-base: #ffffff;
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-base: #1e1e1e;
 }
 
 .button {
     -fx-font-size: 14pt;
-    -fx-background-color: #4682b4;
+    -fx-background-color: #0d47a1;
     -fx-text-fill: #ffffff;
     -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1);
 }
 
 .button:hover {
-    -fx-background-color: #5cacee;
+    -fx-background-color: #1565c0;
+    -fx-cursor: hand;
+    -fx-transition: background-color 0.3s ease-in-out;
 }
 
 .label {
     -fx-font-size: 14pt;
+    -fx-text-fill: #fafafa;
 }
 
 .grid-pane {
@@ -24,7 +30,7 @@
 }
 
 .menu-bar {
-    -fx-background-color: #708090;
+    -fx-background-color: #263238;
 }
 
 .menu-bar .label {

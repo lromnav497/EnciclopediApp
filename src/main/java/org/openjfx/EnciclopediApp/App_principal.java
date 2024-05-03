@@ -38,8 +38,8 @@ public class App_principal {
     	Connection con = ConectarBD.conectarBD();
 
     	Stage primaryStage = new Stage();
-    	
-    	primaryStage.setTitle("Librería");
+    	primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
+    	primaryStage.setTitle("EnciclopediApp");
     	
         // Crear menú
         MenuBar menuBar = new MenuBar();
