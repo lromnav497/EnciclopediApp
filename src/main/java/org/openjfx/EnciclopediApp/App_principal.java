@@ -1,5 +1,6 @@
 package org.openjfx.EnciclopediApp;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -7,8 +8,11 @@ import java.util.List;
 import app.clases.LibroDAO;
 import app.clases.LibroDO;
 import app.utils.ConectarBD;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -52,6 +56,30 @@ public class App_principal {
 		editMenu.getItems().addAll(new MenuItem("Undo"), new MenuItem("Redo"), new SeparatorMenuItem(),
 				new MenuItem("Cut"), new MenuItem("Copy"), new MenuItem("Paste"), new MenuItem("Delete"),
 				new SeparatorMenuItem(), new MenuItem("Select All"), new MenuItem("Unselect All"));
+		
+		Menu logoutMenu = new Menu("Log Out");
+        logoutMenu.setOnAction(e -> {
+        	System.out.println("Algo");
+        	try {
+    			// Cierra la ventana de inicio
+    			Node source = (Node) e.getSource();
+    			Stage stage = (Stage) source.getScene().getWindow();
+    			stage.close();
+
+    			// Abre la ventana principal
+    			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
+    			Parent root2 = fxmlLoader.load();
+    			Stage newstage = new Stage();
+    			newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
+    			newstage.setTitle("EnciclopediApp");
+    			newstage.setScene(new Scene(root2));
+    			newstage.setResizable(false);
+    			newstage.show();
+    		} catch (IOException e1) {
+    			e1.printStackTrace();
+    		}
+            
+        });
 
 		Menu helpMenu = new Menu("Help");
 
@@ -67,7 +95,7 @@ public class App_principal {
 
 		helpMenu.getItems().add(new MenuItem("About MyHelloApp"));
 		helpMenu.getItems().addAll(acercaDeItem);
-		menuBar.getMenus().addAll(fileMenu, editMenu, helpMenu);
+		menuBar.getMenus().addAll(fileMenu, editMenu, logoutMenu, helpMenu);
 
 		SplitPane splitPane = new SplitPane();
 		VBox.setVgrow(splitPane, Priority.ALWAYS);
