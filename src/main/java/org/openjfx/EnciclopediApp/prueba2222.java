@@ -10,6 +10,7 @@ import app.utils.ConectarBD;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -32,34 +33,47 @@ public class prueba2222 extends Application {
         perfilMenu.getItems().addAll(logoutItem, configItem, prefsItem);
         menuBar.getMenus().add(perfilMenu);
 
-        // Crear paneles de libros y detalles
+     // Crear paneles de libros y detalles
         VBox librosPanel = new VBox();
         librosPanel.getChildren().add(new Label("Libros"));
 
         try {
         	// Obtener los libros de la base de datos
         	List<LibroDO> libros = LibroDAO.getLibros(con);
+
+        	// Crear un panel de desplazamiento para los libros
+        	ScrollPane scrollPane = new ScrollPane();
+        	scrollPane.setContent(librosPanel);
+        	scrollPane.setFitToWidth(true); // Ajusta el ancho del contenido al ancho del panel de desplazamiento
+
         	for (LibroDO libro : libros) {
         	    // Crear los elementos de la interfaz de usuario para cada libro
-        	   // ImageView logo = new ImageView(libro.getImagen());
+        		
+        		 // load the image
+        		System.out.println(libro.getImagen());
+                Image image = new Image("pepe/logo.png");
+
+        	    ImageView logo = new ImageView();
+        	    logo.setFitWidth(100);  // Ancho del ImageView
+        	    logo.setFitHeight(100); // Alto del ImageView
+        	    logo.setImage(image);
+        	    logo.setPreserveRatio(true);
+
+        	    
         	    Label nombre = new Label(libro.getNombre());
         	    Label autor = new Label(libro.getAutor());
         	    Label precio = new Label(String.valueOf(libro.getPrecio()));
         	    Button comprarBtn = new Button("Comprar");
         	    Button verBtn = new Button("Ver");
 
-        	    // Crear un GridPane para organizar los elementos
-        	    GridPane libroPanel = new GridPane();
-        	  //  libroPanel.add(logo, 0, 0, 1, 2);     // Columna 0, fila 0, ocupa 1 columna y 2 filas
-        	    libroPanel.add(nombre, 1, 0);          // Columna 1, fila 0
-        	    libroPanel.add(precio, 2, 0);          // Columna 2, fila 0
-        	    libroPanel.add(comprarBtn, 3, 0);      // Columna 3, fila 0
-        	    libroPanel.add(autor, 1, 1);           // Columna 1, fila 1
-        	    libroPanel.add(verBtn, 2, 1);          // Columna 2, fila 1
+        	    // Crear un VBox para organizar los elementos
+        	    VBox libroPanel = new VBox();
+        	    libroPanel.getChildren().addAll(logo,nombre, autor, precio, comprarBtn, verBtn);
 
         	    // Agregar el panel del libro al panel de libros
         	    librosPanel.getChildren().add(libroPanel);
         	}
+
 
 			con.close();
 		} catch (SQLException e) {
@@ -78,8 +92,9 @@ public class prueba2222 extends Application {
         // Añadir menú y paneles al layout principal
         VBox mainLayout = new VBox();
         mainLayout.getChildren().addAll(menuBar, splitPane);
-
+        
         Scene scene = new Scene(mainLayout, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/estilos/pruebadeprueba.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
     }

@@ -1,0 +1,32 @@
+.root {
+    -fx-font-family: "Arial";
+    -fx-base: #ffffff;
+}
+
+.button {
+    -fx-font-size: 14pt;
+    -fx-background-color: #4682b4;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10px;
+}
+
+.button:hover {
+    -fx-background-color: #5cacee;
+}
+
+.label {
+    -fx-font-size: 14pt;
+}
+
+.grid-pane {
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+}
+
+.menu-bar {
+    -fx-background-color: #708090;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #ffffff;
+}
