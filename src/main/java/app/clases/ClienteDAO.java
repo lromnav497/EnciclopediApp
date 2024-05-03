@@ -5,7 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * La clase ClienteDAO proporciona métodos para interactuar con la tabla de
+ * clientes en la base de datos.
+ * 
+ * @author Luis Carlos Romero Y Francisco Audino
+ */
+
 public class ClienteDAO {
+
+	/**
+	 * Elimina un cliente de la base de datos.
+	 *
+	 * @param id  El ID del cliente a eliminar.
+	 * @param con La conexión a la base de datos.
+	 * @return 0 si la eliminación fue exitosa, -1 en caso contrario.
+	 */
 
 	// Eliminar cliente
 	public static int removeCliente(int id, Connection con) {
@@ -20,6 +35,14 @@ public class ClienteDAO {
 			return -1;
 		}
 	}
+
+	/**
+	 * Inserta un nuevo cliente en la base de datos.
+	 *
+	 * @param cliente El objeto ClienteDO que contiene los detalles del cliente.
+	 * @param con     La conexión a la base de datos.
+	 * @return 1 si la inserción fue exitosa, 0 en caso contrario.
+	 */
 
 	// Insertar nuevos clientes
 	public static int insertCliente(ClienteDO cliente, Connection con) {
@@ -57,6 +80,15 @@ public class ClienteDAO {
 		}
 	}
 
+	/**
+	 * Carga los detalles de un cliente de la base de datos.
+	 *
+	 * @param con La conexión a la base de datos.
+	 * @param id  El ID del cliente a cargar.
+	 * @return Un objeto ClienteDO que contiene los detalles del cliente, o null si
+	 *         el cliente no existe.
+	 */
+
 	// Cargar todos los datos del cliente con la id
 	public static ClienteDO loadCliente(Connection con, int id) {
 		try {
@@ -76,6 +108,15 @@ public class ClienteDAO {
 			return null;
 		}
 	}
+
+	/**
+	 * Comprueba si un cliente existe en la base de datos.
+	 *
+	 * @param con      La conexión a la base de datos.
+	 * @param correo   El correo electrónico del cliente.
+	 * @param password La contraseña del cliente.
+	 * @return true si el cliente existe, false en caso contrario.
+	 */
 
 	// Buscar el cliente en la bd
 	public static boolean checkCliente(Connection con, String correo, String password) {
@@ -97,6 +138,14 @@ public class ClienteDAO {
 		return false;
 	}
 
+	/**
+	 * Comprueba si un número de teléfono existe en la base de datos.
+	 *
+	 * @param con      La conexión a la base de datos.
+	 * @param telefono El número de teléfono a comprobar.
+	 * @return true si el número de teléfono existe, false en caso contrario.
+	 */
+
 	// Buscar el telefono en la bd
 	public static boolean checkTelefonoCliente(Connection con, String telefono) {
 		try {
@@ -115,6 +164,14 @@ public class ClienteDAO {
 		// Si no hay resultados, entonces el telefono no existe
 		return false;
 	}
+
+	/**
+	 * Comprueba si un correo electrónico existe en la base de datos.
+	 *
+	 * @param con    La conexión a la base de datos.
+	 * @param correo El correo electrónico a comprobar.
+	 * @return true si el correo electrónico existe, false en caso contrario.
+	 */
 
 	// Buscar el correo en la bd
 	public static boolean checkCorreoCliente(Connection con, String correo) {

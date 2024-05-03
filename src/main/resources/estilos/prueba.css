@@ -17,6 +17,7 @@
 }
 
 .error-label {
+    /* Define el tamaño de fuente, el color y la visibilidad inicial para las etiquetas de error */
     -fx-font-size: 12px;
     -fx-text-fill: #ff0000;
     -fx-font-weight: bold; /* Hacer el texto en negrita */
@@ -25,6 +26,7 @@
 
 /* Estilos de los campos de texto y botones */
 .text-field, .password-field {
+    /* Establece el color del borde, el radio del borde y los efectos para los campos de texto */
     -fx-border-color: #ccc;
     -fx-border-radius: 5;
     -fx-effect: innershadow(two-pass-box, rgba(0,0,0,0.1), 1, 0.0, 0, 3);
@@ -35,6 +37,7 @@
 }
 
 .register-button {
+    /* Establece el color de fondo, el color del texto, el color del borde y el cursor para el botón de registro */
     -fx-background-color: #76b852;
     -fx-text-fill: white;
     -fx-border-color: transparent;
