@@ -85,23 +85,6 @@ public class App_principal {
 		Menu logoutMenu = new Menu();
 		logoutMenu.getItems().add(logoutItem);
 
-		/**
-		 * Menu logoutMenu = new Menu("Log Out"); logoutMenu.setOnAction(e -> {
-		 * System.out.println("Algo"); try { // Cierra la ventana de inicio Node source
-		 * = (Node) e.getSource(); Stage stage = (Stage) source.getScene().getWindow();
-		 * stage.close();
-		 * 
-		 * // Abre la ventana principal FXMLLoader fxmlLoader = new
-		 * FXMLLoader(getClass().getResource("login.fxml")); Parent root2 =
-		 * fxmlLoader.load(); Stage newstage = new Stage(); newstage.getIcons().add(new
-		 * Image(getClass().getResourceAsStream("/img/logo.png")));
-		 * newstage.setTitle("EnciclopediApp"); newstage.setScene(new Scene(root2));
-		 * newstage.setResizable(false); newstage.show(); } catch (IOException e1) {
-		 * e1.printStackTrace(); }
-		 * 
-		 * });
-		 **/
-
 		Menu helpMenu = new Menu("Help");
 
 		MenuItem acercaDeItem = new MenuItem("Acerca de");
