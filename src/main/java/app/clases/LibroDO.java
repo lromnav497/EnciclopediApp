@@ -8,24 +8,17 @@ public class LibroDO {
 	private String categoria;
 	private String autor;
 	private String editorial;
-<<<<<<< Updated upstream
 	private Date fch_publi;
-=======
-	private String fch_publi;
 	private String imagen;
->>>>>>> Stashed changes
 
 	public LibroDO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-<<<<<<< Updated upstream
-	public LibroDO(int idlibros, String nombre, String categoria, String autor, String editorial, Date fch_publi) {
-=======
-	public LibroDO(int idlibros, String nombre, String categoria, String autor, String editorial, String fch_publi,
+	public LibroDO(int idlibros, String nombre, String categoria, String autor, String editorial, Date fch_publi,
 			String imagen) {
->>>>>>> Stashed changes
+
 		super();
 		this.idlibros = idlibros;
 		this.nombre = nombre;
