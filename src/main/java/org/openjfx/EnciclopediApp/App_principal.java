@@ -8,6 +8,7 @@ import java.util.List;
 import app.clases.LibroDAO;
 import app.clases.LibroDO;
 import app.utils.ConectarBD;
+import app.utils.UserProperties;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -35,7 +36,7 @@ import javafx.stage.Stage;
 
 public class App_principal {
 
-	private Stage primaryStage;
+	private UserProperties userProperties = new UserProperties();
 
 	public void showMainWindow() {
 		// Conectar con la bd
@@ -63,7 +64,6 @@ public class App_principal {
 		MenuItem logoutItem = new MenuItem("Log Out");
 		logoutItem.setOnAction(e -> {
 			try {
-				primaryStage.close();
 				// Abre la ventana principal
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login.fxml"));
 				Parent root2 = fxmlLoader.load();
@@ -73,6 +73,8 @@ public class App_principal {
 				newstage.setScene(new Scene(root2));
 				newstage.setResizable(false);
 				newstage.show();
+				primaryStage.close();
+				userProperties.saveUserDetails("", "prueba", false);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
