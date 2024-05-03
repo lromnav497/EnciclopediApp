@@ -14,6 +14,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -21,9 +23,11 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
@@ -40,22 +44,17 @@ public class App_principal {
 
 	public void showMainWindow() {
 		// Conectar con la bd
-		Connection con = ConectarBD.conectarBD();
+    	Connection con = ConectarBD.conectarBD();
 
-		VBox root = new VBox();
-		root.setPrefSize(900, 600);
-
-		Scene scene = new Scene(root);
-		Stage primaryStage = new Stage();
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
-		MenuBar menuBar = new MenuBar();
-		VBox.setVgrow(menuBar, Priority.NEVER);
-
-		Menu PerfilMenu = new Menu("Perfil");
-
-		MenuItem logoutItem = new MenuItem("Log Out");
+    	Stage primaryStage = new Stage();
+    	
+    	primaryStage.setTitle("Librería");
+    	
+        // Crear menú
+        MenuBar menuBar = new MenuBar();
+        Menu perfilMenu = new Menu("Perfil");
+        
+        MenuItem logoutItem = new MenuItem("Log Out");
 		logoutItem.setOnAction(e -> {
 			try {
 				// Abre la ventana principal
@@ -73,15 +72,8 @@ public class App_principal {
 				e1.printStackTrace();
 			}
 		});
-		PerfilMenu.getItems().add(logoutItem);
+		perfilMenu.getItems().add(logoutItem);
 		
-		Menu editMenu = new Menu("Edit");
-		editMenu.getItems().addAll(new MenuItem("Undo"), new MenuItem("Redo"), new SeparatorMenuItem(),
-				new MenuItem("Cut"), new MenuItem("Copy"), new MenuItem("Paste"), new MenuItem("Delete"),
-				new SeparatorMenuItem(), new MenuItem("Select All"), new MenuItem("Unselect All"));
-
-		Menu helpMenu = new Menu("Help");
-
 		MenuItem acercaDeItem = new MenuItem("Acerca de");
 		acercaDeItem.setOnAction(e -> {
 			WebView webView = new WebView();
@@ -92,108 +84,119 @@ public class App_principal {
 			githubStage.show();
 		});
 
-		helpMenu.getItems().add(new MenuItem("About MyHelloApp"));
-		helpMenu.getItems().addAll(acercaDeItem);
-		menuBar.getMenus().addAll(PerfilMenu, editMenu, helpMenu);
+		perfilMenu.getItems().add(new MenuItem("About MyHelloApp"));
+		perfilMenu.getItems().addAll(acercaDeItem);
+		
+        MenuItem configItem = new MenuItem("Configuración");
+        MenuItem prefsItem = new MenuItem("Preferencias");
+        perfilMenu.getItems().addAll(configItem, prefsItem);
+        menuBar.getMenus().add(perfilMenu);
 
-		SplitPane splitPane = new SplitPane();
-		VBox.setVgrow(splitPane, Priority.ALWAYS);
+     // Crear el GridPane
+        GridPane grid = new GridPane();
+        grid.setHgap(10); // Espacio horizontal entre las celdas
+        grid.setVgap(10); // Espacio vertical entre las celdas
 
-		AnchorPane masterPane = new AnchorPane();
-		Label masterLabel = new Label("Master");
-		masterLabel.setFont(new Font(18));
-		masterLabel.setTextFill(Color.rgb(159, 159, 159));
-		masterLabel.setAlignment(Pos.CENTER);
-		masterPane.getChildren().add(masterLabel);
+        try {
+            List<LibroDO> libros = LibroDAO.getLibros(con);
 
-		// pruebas
-		try {
-			// Obtener los libros de tu base de datos usando LibroDAO
-			List<LibroDO> libros = LibroDAO.getLibros(con); // Asegúrate de implementar y usar el método correcto de tu
-															// LibroDAO
+            int row = 0;
+            int column = 0;
 
-			for (LibroDO libro : libros) {
-				// Crear un nuevo VBox para cada libro
-				VBox libroVBox = new VBox();
+            for (LibroDO libro : libros) {
+                try {
+                    Image image = new Image(getClass().getResourceAsStream("img" + "/" + libro.getImagen()));
+                    ImageView logo = new ImageView();
+                    logo.setFitWidth(100);
+                    logo.setFitHeight(100);
+                    logo.setImage(image);
+                    logo.setPreserveRatio(true);
 
-				// Añadir la imagen
-				String url = libro.getImagen();
-				if (url != null && !url.isEmpty()) {
-					// load the image
-					Image image = new Image("/logo.png");
+                    Label nombre = new Label(libro.getNombre());
+                    Label autor = new Label(libro.getAutor());
+                    Label precio = new Label(String.valueOf(libro.getPrecio()));
+                    Button comprarBtn = new Button("Comprar");
+                    Button verBtn = new Button("Ver");
 
-					// simple displays ImageView the image as is
-					ImageView iv1 = new ImageView();
-					iv1.setImage(image);
-					libroVBox.getChildren().add(iv1);
-				}
+                    VBox libroPanel = new VBox();
+                    libroPanel.setPrefHeight(200); // Establece una altura preferida para cada panel de libro
+                    libroPanel.setMaxHeight(200); // Establece una altura máxima para cada panel de libro
+                    libroPanel.getChildren().addAll(logo,nombre, autor, precio, comprarBtn, verBtn);
 
-				// Añadir el nombre del libro
-				Label nombreLabel = new Label(libro.getNombre());
-				nombreLabel.setFont(new Font(18));
-				nombreLabel.setTextFill(Color.rgb(159, 159, 159));
-				libroVBox.getChildren().add(nombreLabel);
+                    grid.add(libroPanel, column, row);
 
-				// Añadir el autor del libro
-				Label autorLabel = new Label(libro.getAutor());
-				autorLabel.setFont(new Font(18));
-				autorLabel.setTextFill(Color.rgb(159, 159, 159));
-				libroVBox.getChildren().add(autorLabel);
+                    column++;
+                    if (column > 3) { // Cambia este número según el número de columnas que desees
+                        column = 0;
+                        row++;
+                    }
 
-				// Añadir la categoría del libro
-				Label categoriaLabel = new Label(libro.getCategoria());
-				categoriaLabel.setFont(new Font(18));
-				categoriaLabel.setTextFill(Color.rgb(159, 159, 159));
-				libroVBox.getChildren().add(categoriaLabel);
+                } catch (Exception e) {
+                    Image image = new Image(getClass().getResourceAsStream("img/oops.png"));
+                    ImageView logo = new ImageView();
+                    logo.setFitWidth(100);
+                    logo.setFitHeight(100);
+                    logo.setImage(image);
+                    logo.setPreserveRatio(true);
 
-				// Añadir el libroVBox al masterPane
-				masterPane.getChildren().add(libroVBox);
-			}
-			con.close();
-		} catch (SQLException e) {
-			// TODO: handle exception
-		}
+                    Label nombre = new Label(libro.getNombre());
+                    Label autor = new Label(libro.getAutor());
+                    Label precio = new Label(String.valueOf(libro.getPrecio()));
+                    Button comprarBtn = new Button("Comprar");
+                    Button verBtn = new Button("Ver");
 
-		// pruebas
-		ScrollPane viewPane = new ScrollPane();
-		AnchorPane viewContent = new AnchorPane();
-		Label viewLabel = new Label("View");
-		viewLabel.setFont(new Font(18));
-		viewLabel.setTextFill(Color.rgb(159, 159, 159));
-		viewLabel.setAlignment(Pos.CENTER);
-		viewContent.getChildren().add(viewLabel);
-		viewPane.setContent(viewContent);
+                    VBox libroPanel = new VBox();
+                    libroPanel.setPrefHeight(200); // Establece una altura preferida para cada panel de libro
+                    libroPanel.setMaxHeight(200); // Establece una altura máxima para cada panel de libro
+                    libroPanel.getChildren().addAll(logo,nombre, autor, precio, comprarBtn, verBtn);
 
-		AnchorPane detailsPane = new AnchorPane();
-		Label detailsLabel = new Label("Details");
-		detailsLabel.setFont(new Font(18));
-		detailsLabel.setTextFill(Color.rgb(159, 159, 159));
-		detailsLabel.setAlignment(Pos.CENTER);
-		detailsPane.getChildren().add(detailsLabel);
+                    grid.add(libroPanel, column, row);
 
-		splitPane.getItems().addAll(masterPane, viewPane, detailsPane);
+                    column++;
+                    if (column > 3) { // Cambia este número según el número de columnas que desees
+                        column = 0;
+                        row++;
+                    }
+                }
+            }
 
-		HBox statusBox = new HBox();
-		VBox.setVgrow(statusBox, Priority.NEVER);
-		statusBox.setSpacing(5);
-		statusBox.setAlignment(Pos.CENTER_LEFT);
-		statusBox.setPadding(new Insets(3, 3, 3, 3));
+            con.close();
 
-		Label leftStatusLabel = new Label("Left status");
-		HBox.setHgrow(leftStatusLabel, Priority.ALWAYS);
-		leftStatusLabel.setFont(new Font(11));
-		leftStatusLabel.setTextFill(Color.rgb(160, 160, 160));
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(grid); // Asegúrate de que el GridPane se añade al ScrollPane
+            scrollPane.setFitToWidth(true);
 
-		Pane spacer = new Pane();
-		HBox.setHgrow(spacer, Priority.ALWAYS);
 
-		Label rightStatusLabel = new Label("Right status");
-		HBox.setHgrow(rightStatusLabel, Priority.NEVER);
-		rightStatusLabel.setFont(new Font(11));
-		rightStatusLabel.setTextFill(Color.rgb(160, 160, 160));
+            VBox root = new VBox();
+            root.getChildren().add(scrollPane);
 
-		statusBox.getChildren().addAll(leftStatusLabel, spacer, rightStatusLabel);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error Dialog");
+            alert.setHeaderText("Error de SQL");
+            alert.setContentText("Ocurrió un error al obtener los libros de la base de datos.");
 
-		root.getChildren().addAll(menuBar, splitPane, statusBox);
-	}
+            alert.showAndWait();
+        }
+
+
+
+        VBox detallesPanel = new VBox();
+        detallesPanel.getChildren().add(new Label("Detalles"));
+        // Aquí puedes agregar los detalles del libro seleccionado
+
+        // Dividir la ventana en dos
+        SplitPane splitPane = new SplitPane();
+        splitPane.getItems().addAll(grid, detallesPanel);
+
+        // Añadir menú y paneles al layout principal
+        VBox mainLayout = new VBox();
+        mainLayout.getChildren().addAll(menuBar, splitPane);
+        
+        Scene scene = new Scene(mainLayout, 800, 600);
+        scene.getStylesheets().add(getClass().getResource("/estilos/pruebadeprueba.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
 }
