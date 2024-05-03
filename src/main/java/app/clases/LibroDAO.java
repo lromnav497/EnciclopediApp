@@ -3,10 +3,10 @@ package app.clases;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;<<<<<<<Updated upstream=======
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;>>>>>>>Stashed changes
+import java.util.List;
 
 public class LibroDAO {
 
@@ -66,7 +66,8 @@ public class LibroDAO {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new LibroDO(rs.getInt("idlibros"), rs.getString("nombre"), rs.getString("categoria"),
-						rs.getString("autor"), rs.getString("editorial"), rs.getDate("fch_publi"));
+						rs.getString("autor"), rs.getString("editorial"), rs.getDate("fch_publi"),
+						rs.getString("imagen"));
 			} else {
 				return null;
 			}
