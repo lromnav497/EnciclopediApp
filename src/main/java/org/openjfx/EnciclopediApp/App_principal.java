@@ -65,7 +65,6 @@ public class App_principal {
 
 		MenuItem logoutItem = new MenuItem("Log Out");
 		logoutItem.setOnAction(e -> {
-			System.out.println("Algo");
 			try {
 				primaryStage.close();
 				// Abre la ventana principal
