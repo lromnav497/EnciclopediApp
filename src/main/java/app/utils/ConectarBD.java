@@ -3,7 +3,22 @@ package app.utils;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+/**
+ * La clase ConectarBD proporciona un método para establecer una conexión con
+ * una base de datos MySQL.
+ * 
+ * @author Luis Carlos Romero Y Francisco Audino
+ */
+
 public class ConectarBD {
+
+	/**
+	 * Este método establece una conexión con una base de datos MySQL.
+	 *
+	 * @return Una conexión a la base de datos si la conexión es exitosa; null si
+	 *         ocurre una excepción.
+	 */
+
 	public static Connection conectarBD() {
 		try {
 

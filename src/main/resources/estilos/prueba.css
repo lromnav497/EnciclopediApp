@@ -1,5 +1,7 @@
 /* Estilos generales */
+
 .root {
+	/* Configura la fuente y la imagen de fondo para el contenedor principal */
     -fx-font-family: 'Arial';
     -fx-background-image: url('../img/background.png');
     -fx-background-repeat: stretch;   
@@ -9,6 +11,7 @@
 
 /* Estilos de los títulos y etiquetas de error */
 .title-label {
+	/* Define el tamaño de fuente y el margen para las etiquetas de título */
     -fx-font-size: 24px;
     -fx-margin-bottom: 20;
 }

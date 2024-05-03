@@ -19,10 +19,17 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+ * La clase RegisterController gestiona las acciones del usuario en la pantalla
+ * de registro.
+ * 
+ * @author Luis Carlos Romero Y Francisco Audino
+ */
+
 public class RegisterController {
-	
+
 	private UserProperties userProperties = new UserProperties();
-	
+
 	// Obtener los valores del formulario
 	@FXML
 	private TextField nombre;
@@ -55,6 +62,14 @@ public class RegisterController {
 	@FXML
 	private Label errorLabel_info;
 
+	/**
+	 * Este método se encarga de la lógica de registro del usuario. Verifica los
+	 * datos del formulario y, si son correctos, guarda los detalles del usuario y
+	 * abre la ventana principal.
+	 *
+	 * @param event El evento que desencadenó la llamada a este método.
+	 */
+
 	@FXML
 	protected void registrar(ActionEvent event) {
 		// Conectar con la bd
@@ -83,7 +98,7 @@ public class RegisterController {
 			if (fecha_nac_local != null) {
 				fecha_nac = fecha_nac_local.toString();
 			}
-			
+
 			if (comprobarCorreo(email)) {
 				errorLabel_correo2.setVisible(false);
 				if (existeCorreoCliente) {
@@ -93,10 +108,10 @@ public class RegisterController {
 					errorLabel_correo.setVisible(false);
 					comprobaciones[0] = true;
 				}
-		    } else {
-		    	errorLabel_correo2.setVisible(true);
+			} else {
+				errorLabel_correo2.setVisible(true);
 				comprobaciones[0] = false;
-		    }
+			}
 
 			if (existeTelefonoCliente && phone != "") {
 				errorLabel_telefono.setVisible(true);
@@ -153,16 +168,23 @@ public class RegisterController {
 			// TODO: handle exception
 		}
 	}
-	
+
+	/**
+	 * Este método comprueba si un correo electrónico es válido.
+	 *
+	 * @param correo El correo electrónico a comprobar.
+	 * @return true si el correo electrónico es válido, false en caso contrario.
+	 */
+
 	private boolean comprobarCorreo(String correo) {
-	    String regex = "^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)*(\\.[a-zA-Z]{2,})$";
-	    if (correo.matches(regex)) {
-	        // El correo electrónico es válido
-	        return true;
-	    } else {
-	        // El correo electrónico no es válido
-	        return false;
-	    }
+		String regex = "^[\\w-]+(\\.[\\w-]+)*@[\\w-]+(\\.[\\w-]+)*(\\.[a-zA-Z]{2,})$";
+		if (correo.matches(regex)) {
+			// El correo electrónico es válido
+			return true;
+		} else {
+			// El correo electrónico no es válido
+			return false;
+		}
 	}
 
 }

@@ -19,16 +19,31 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * La clase LoginController gestiona las acciones del usuario en la pantalla de
+ * inicio de sesión.
+ * 
+ * @author Luis Carlos Romero Y Francisco Audino
+ */
+
 public class LoginController {
 
 	private UserProperties userProperties = new UserProperties();
-	
+
 	@FXML
 	private TextField loginCorreo;
 	@FXML
 	private PasswordField loginPassword;
 	@FXML
 	private Label errorLabel;
+
+	/**
+	 * Este método se encarga de la lógica de inicio de sesión del usuario. Verifica
+	 * las credenciales del usuario y, si son correctas, guarda los detalles del
+	 * usuario y abre la ventana principal.
+	 *
+	 * @param event El evento que desencadenó la llamada a este método.
+	 */
 
 	@FXML
 	protected void login(ActionEvent event) {
@@ -60,6 +75,12 @@ public class LoginController {
 			// TODO: handle exception
 		}
 	}
+
+	/**
+	 * Este método abre la ventana de registro.
+	 *
+	 * @param event El evento que desencadenó la llamada a este método.
+	 */
 
 	@FXML
 	protected void open_register(ActionEvent event) {
