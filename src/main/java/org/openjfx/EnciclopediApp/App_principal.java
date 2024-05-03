@@ -53,13 +53,7 @@ public class App_principal {
 		MenuBar menuBar = new MenuBar();
 		VBox.setVgrow(menuBar, Priority.NEVER);
 
-		Menu fileMenu = new Menu("Perfil");
-		
-
-		Menu editMenu = new Menu("Edit");
-		editMenu.getItems().addAll(new MenuItem("Undo"), new MenuItem("Redo"), new SeparatorMenuItem(),
-				new MenuItem("Cut"), new MenuItem("Copy"), new MenuItem("Paste"), new MenuItem("Delete"),
-				new SeparatorMenuItem(), new MenuItem("Select All"), new MenuItem("Unselect All"));
+		Menu PerfilMenu = new Menu("Perfil");
 
 		MenuItem logoutItem = new MenuItem("Log Out");
 		logoutItem.setOnAction(e -> {
@@ -79,9 +73,12 @@ public class App_principal {
 				e1.printStackTrace();
 			}
 		});
-
-		Menu logoutMenu = new Menu();
-		logoutMenu.getItems().add(logoutItem);
+		PerfilMenu.getItems().add(logoutItem);
+		
+		Menu editMenu = new Menu("Edit");
+		editMenu.getItems().addAll(new MenuItem("Undo"), new MenuItem("Redo"), new SeparatorMenuItem(),
+				new MenuItem("Cut"), new MenuItem("Copy"), new MenuItem("Paste"), new MenuItem("Delete"),
+				new SeparatorMenuItem(), new MenuItem("Select All"), new MenuItem("Unselect All"));
 
 		Menu helpMenu = new Menu("Help");
 
@@ -97,7 +94,7 @@ public class App_principal {
 
 		helpMenu.getItems().add(new MenuItem("About MyHelloApp"));
 		helpMenu.getItems().addAll(acercaDeItem);
-		menuBar.getMenus().addAll(fileMenu, editMenu, logoutMenu, helpMenu);
+		menuBar.getMenus().addAll(PerfilMenu, editMenu, helpMenu);
 
 		SplitPane splitPane = new SplitPane();
 		VBox.setVgrow(splitPane, Priority.ALWAYS);
