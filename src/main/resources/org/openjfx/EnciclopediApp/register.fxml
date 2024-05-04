@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../estilos/prueba.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EnciclopediApp.RegisterController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../estilos/login.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.openjfx.EnciclopediApp.RegisterController">
    <left>
       <AnchorPane prefHeight="400.0" prefWidth="242.0" BorderPane.alignment="CENTER">
          <children>
@@ -32,7 +32,10 @@
    <right>
       <AnchorPane prefHeight="403.0" prefWidth="402.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="107.0" layoutY="3.0" styleClass="title-label" text="Registro" textFill="WHITE" />
+            <Label layoutX="107.0" layoutY="3.0" styleClass="title-label" text="Registro" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Label>
             <TextField fx:id="nombre" layoutX="76.0" layoutY="39.0" promptText="Nombre" />
             <TextField fx:id="apellido" layoutX="76.0" layoutY="71.0" promptText="Apellido" />
             <Label fx:id="errorLabel_fecha" layoutX="25.0" layoutY="96.0" styleClass="error-label" text="Introduze una fecha de nacimiento valida." visible="false" />

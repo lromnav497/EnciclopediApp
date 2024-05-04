@@ -7,41 +7,22 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * La clase UserProperties implementa la lógica para guardar y cargar los datos
- * del usuario.
- * 
- * @author Luis Carlos Romero Y Francisco Audino
- */
-
 public class UserProperties {
 
 	private Properties config = new Properties();
-
 	String homeDir = System.getProperty("user.home");
 
-	/**
-	 * Guarda los detalles del usuario en un archivo de propiedades.
-	 *
-	 * @param email       El correo electrónico del usuario.
-	 * @param userDetails Los detalles del usuario.
-	 * @param isLoggedIn  Un booleano que indica si el usuario ha iniciado sesión.
-	 */
-
-	public void saveUserDetails(String email, String userDetails, boolean isLoggedIn) {
-
-		/**
-		 * Guarda los detalles del usuario en un archivo de propiedades.
-		 *
-		 * @return Los detalles del usuario que indica el correo no fue encontrado.
-		 */
-
+	public void saveUserDetails(String nombre, String apellido, String fechaNacimiento, String email, String telefono, boolean isAfiliado, boolean isAceptaPublicidad, boolean isLoggedIn) {
+		config.setProperty("nombre", nombre);
+		config.setProperty("apellido", apellido);
+		config.setProperty("fechaNacimiento", fechaNacimiento);
 		config.setProperty("email", email);
-		config.setProperty(email, userDetails);
+		config.setProperty("telefono", telefono);
+		config.setProperty("isAfiliado", String.valueOf(isAfiliado));
+		config.setProperty("isAceptaPublicidad", String.valueOf(isAceptaPublicidad));
 		config.setProperty("isLoggedIn", String.valueOf(isLoggedIn));
 		try {
-			FileOutputStream out = new FileOutputStream(
-					homeDir + File.separator + "EnciclopediApp" + File.separator + "user.properties");
+			FileOutputStream out = new FileOutputStream(homeDir + File.separator + "EnciclopediApp" + File.separator + "user.properties");
 			config.store(out, null);
 			out.close();
 		} catch (IOException e) {
@@ -49,41 +30,32 @@ public class UserProperties {
 		}
 	}
 
-	public String loadUserDetails() {
-
-		/**
-		 * Verifica si el usuario ha iniciado sesión.
-		 *
-		 * @return Un booleano que indica si el usuario ha iniciado sesión.
-		 */
-
-		String datos = "";
-
+	public String[] loadUserDetails() {
+		String[] datos = new String[7];
 		try {
-			FileInputStream in = new FileInputStream(
-					homeDir + File.separator + "EnciclopediApp" + File.separator + "user.properties");
+			FileInputStream in = new FileInputStream(homeDir + File.separator + "EnciclopediApp" + File.separator + "user.properties");
 			config.load(in);
 			in.close();
-
-			// Obtener detalles del usuario
-			datos = config.getProperty(config.getProperty("email"), "Correo no encontrado");
+			datos[0] = config.getProperty("nombre", "");
+			datos[1] = config.getProperty("apellido", "");
+			datos[2] = config.getProperty("fechaNacimiento", "");
+			datos[3] = config.getProperty("email", "");
+			datos[4] = config.getProperty("telefono", "");
+			datos[5] = config.getProperty("isAfiliado", "false");
+			datos[6] = config.getProperty("isAceptaPublicidad", "false");
 		} catch (IOException e) {
-			// Si el archivo no existe, creamos la carpeta contenedora
 			File theDir = new File(homeDir + File.separator + "EnciclopediApp");
 			if (!theDir.exists()) {
 				theDir.mkdirs();
 			}
-
 			if (!(e instanceof FileNotFoundException)) {
 				e.printStackTrace();
 			}
-
 		}
 		return datos;
 	}
 
 	public boolean isLoggedIn() {
-		// Verificar si el usuario ha iniciado sesión
 		return Boolean.parseBoolean(config.getProperty("isLoggedIn", "false"));
 	}
 }

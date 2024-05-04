@@ -46,7 +46,7 @@ public class App_principal {
         Menu perfilMenu = new Menu("Perfil");
         Menu ayudaMenu = new Menu("Ayuda");
         
-        MenuItem logoutItem = new MenuItem("Log Out");
+        MenuItem logoutItem = new MenuItem("Cerrar sesión");
 		logoutItem.setOnAction(e -> {
 			try {
 				// Abre la ventana principal
@@ -59,7 +59,7 @@ public class App_principal {
 				newstage.setResizable(false);
 				newstage.show();
 				primaryStage.close();
-				userProperties.saveUserDetails("", "prueba", false);
+				userProperties.saveUserDetails("", "","","","",false,false, false);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

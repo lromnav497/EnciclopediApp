@@ -1,9 +1,11 @@
 package org.openjfx.EnciclopediApp;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import app.clases.ClienteDAO;
 import app.clases.ClienteDO;
@@ -29,6 +31,7 @@ import javafx.stage.Stage;
 public class ConfigurationsController {
 
 	private UserProperties userProperties = new UserProperties();
+	
 
 	// Obtener los valores del formulario
 	@FXML
@@ -61,9 +64,22 @@ public class ConfigurationsController {
 	 *
 	 * @param event El evento que desencadenó la llamada a este método.
 	 */
+	
+	@FXML
+    private void initialize() {
+        // Cargar el archivo de propiedades
+		String[] propiedas = userProperties.loadUserDetails();
 
+		// Establecer los valores por defecto de los TextField
+		email.setText(propiedas[3]);
+		phone.setText(propiedas[4]);
+		afiliate.setSelected(Boolean.valueOf(propiedas[5]));
+		acceptAds.setSelected(Boolean.valueOf(propiedas[6]));
+    }
+	
 	@FXML
 	protected void Agregar_cambios(ActionEvent event) {
+		String[] propiedas = userProperties.loadUserDetails();
 		// Conectar con la bd
 		Connection con = ConectarBD.conectarBD();
 
@@ -119,7 +135,12 @@ public class ConfigurationsController {
 				errorLabel_info.setVisible(false);
 				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true) {
 					// modificar funcion
-					System.out.println("PEPE");
+					ClienteDAO.updateField(con, propiedas[3], "password", contrasena);
+					ClienteDAO.updateField(con, propiedas[3], "telefono", telefono);
+					ClienteDAO.updateField(con, propiedas[3], "afiliado", afiliado);
+					ClienteDAO.updateField(con, propiedas[3], "acept_publi", acept_publi);
+					ClienteDAO.updateField(con, propiedas[3], "correo", correo);
+					userProperties.saveUserDetails(propiedas[0], propiedas[1], propiedas[2], correo, telefono, afiliado, acept_publi, true);
 				} else {
 
 				}
