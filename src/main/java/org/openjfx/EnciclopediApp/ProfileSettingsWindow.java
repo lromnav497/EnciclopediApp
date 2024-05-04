@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class ProfileSettingsWindow extends Stage {
+/**public class ProfileSettingsWindow extends Stage {
 
     public ProfileSettingsWindow() {
         setTitle("Profile Settings");
@@ -34,4 +34,4 @@ public class ProfileSettingsWindow extends Stage {
         close(); // Cierra la ventana después de guardar
     }
 
-}
+}**/
