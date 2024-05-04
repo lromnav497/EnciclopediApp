@@ -29,6 +29,11 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+private void showProfileSettings() {
+    ProfileSettingsWindow settingsWindow = new ProfileSettingsWindow();
+    settingsWindow.showAndWait();
+}
+
 public class App_principal {
 
 	private UserProperties userProperties = new UserProperties();
@@ -44,7 +49,9 @@ public class App_principal {
         // Crear menú
         MenuBar menuBar = new MenuBar();
         Menu perfilMenu = new Menu("Perfil");
-        Menu ayudaMenu = new Menu("Ayuda");
+        MenuItem customizeItem = new MenuItem("M");
+        customizeItem.setOnAction(e -> showProfileSettings());
+        profileMenu.getItems().addAll(customizeItem);
         
         MenuItem logoutItem = new MenuItem("Cerrar sesión");
 		logoutItem.setOnAction(e -> {
@@ -54,7 +61,7 @@ public class App_principal {
 				Parent root2 = fxmlLoader.load();
 				Stage newstage = new Stage();
 				newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
-				newstage.setTitle("EnciclopediApp - Login");
+				newstage.setTitle("EnciclopediApp");
 				newstage.setScene(new Scene(root2));
 				newstage.setResizable(false);
 				newstage.show();
@@ -71,47 +78,18 @@ public class App_principal {
 			WebView webView = new WebView();
 			webView.getEngine().load("https://github.com/lromnav497/EnciclopediApp");
 			Stage githubStage = new Stage();
-			githubStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
-			githubStage.setTitle("EnciclopediApp - GitHub");
 			githubStage.initModality(Modality.APPLICATION_MODAL);
 			githubStage.setScene(new Scene(webView, 500, 500));
 			githubStage.show();
 		});
-		
-		MenuItem manualItem = new MenuItem("Manual");
-		manualItem.setOnAction(e -> {
-			
-		});
-		
-		MenuItem soporteItem = new MenuItem("Soporte");
-		soporteItem.setOnAction(e -> {
-			
-		});
 
-		ayudaMenu.getItems().addAll(acercaDeItem,manualItem,soporteItem);
+		perfilMenu.getItems().add(new MenuItem("About MyHelloApp"));
+		perfilMenu.getItems().addAll(acercaDeItem);
 		
         MenuItem configItem = new MenuItem("Configuración");
-        configItem.setOnAction(e -> {
-			try {
-				// Abre la ventana principal
-				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("configuration.fxml"));
-				Parent root2 = fxmlLoader.load();
-				Stage newstage = new Stage();
-				newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
-				newstage.setTitle("EnciclopediApp - Configuration");
-				newstage.initModality(Modality.APPLICATION_MODAL);
-				newstage.setScene(new Scene(root2));
-				newstage.setResizable(false);
-				newstage.show();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		});
-        
         MenuItem prefsItem = new MenuItem("Preferencias");
         perfilMenu.getItems().addAll(configItem, prefsItem);
-        menuBar.getMenus().addAll(perfilMenu, ayudaMenu);
-        
+        menuBar.getMenus().add(perfilMenu);
 
      // Crear el GridPane
         GridPane grid = new GridPane();
