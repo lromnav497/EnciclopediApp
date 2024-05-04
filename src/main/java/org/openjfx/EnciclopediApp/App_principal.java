@@ -44,6 +44,7 @@ public class App_principal {
         // Crear menú
         MenuBar menuBar = new MenuBar();
         Menu perfilMenu = new Menu("Perfil");
+        System.out.println("Hola");
         
         MenuItem logoutItem = new MenuItem("Log Out");
 		logoutItem.setOnAction(e -> {
