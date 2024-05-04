@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="org.openjfx.EnciclopediApp.ConfigurationsController">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <Label text="Modificar Información"/>
+
+    <Label text="Correo:"/>
+    <Label fx:id="errorLabel_correo" text="Ya existe un usuario con el mismo correo." visible="false" />
+    <Label fx:id="errorLabel_correo2" text="Introduzca un correo valido." visible="false" />
+    <TextField fx:id="email" promptText="Introduce tu correo"/>
+
+    <Label text="Teléfono:"/>
+    <Label fx:id="errorLabel_telefono" text="Ya existe un usuario con el mismo telefono." visible="false" />
+    <TextField fx:id="phone" promptText="Introduce tu teléfono"/>
+
+    <Label text="Contraseña:"/>
+    <Label fx:id="errorLabel_contrasena" text="Las contraseñas no coinciden." visible="false" />
+    <PasswordField fx:id="password" promptText="Introduce tu contraseña"/>
+    <Label text="Confirmar contraseña:"/>
+    <PasswordField fx:id="confirmpassword" promptText="Introduce tu contraseña"/>
+
+    <CheckBox fx:id="afiliate" text="Afiliado"/>
+    <CheckBox fx:id="acceptAds" text="Aceptar publicidad"/>
+    
+    <Label fx:id="errorLabel_info" text="Todos los campos son obligatorios." visible="false" />
+    <Button text="Guardar Cambios" onAction="#Agregar_cambios"/>
+</VBox>

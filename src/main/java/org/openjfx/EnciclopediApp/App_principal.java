@@ -29,7 +29,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-private void class showProfileSettings() {
+private void showProfileSettings() {
     ProfileSettingsWindow settingsWindow = new ProfileSettingsWindow();
     settingsWindow.showAndWait();
 }

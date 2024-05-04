@@ -95,7 +95,7 @@ public class LoginController {
 			Parent root = fxmlLoader.load();
 			Stage newstage = new Stage();
 			newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
-			newstage.setTitle("EnciclopediApp");
+			newstage.setTitle("EnciclopediApp - Register");
 			newstage.setScene(new Scene(root));
 			newstage.setResizable(false);
 			newstage.show();
