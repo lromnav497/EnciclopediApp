@@ -41,7 +41,6 @@ public class App_inicio extends Application {
 			mainApp.showMainWindow();
 		} else {
 			scene = new Scene(loadFXML("login"), 549, 358);
-			scene.getStylesheets().addAll(this.getClass().getResource("/estilos/prueba.css").toExternalForm());
 			stage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
 			stage.setTitle("EnciclopediApp - Login");
 			stage.setScene(scene);

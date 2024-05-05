@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import app.clases.ClienteDAO;
+import app.clases.ClienteDO;
 import app.utils.ConectarBD;
 import app.utils.UserProperties;
 import javafx.event.ActionEvent;
@@ -57,8 +58,9 @@ public class LoginController {
 			boolean usuarioExiste = ClienteDAO.checkCliente(con, correo, password);
 
 			if (usuarioExiste) {
+				ClienteDO cliente = ClienteDAO.loadCliente(con, correo);
 				errorLabel.setVisible(false);
-				userProperties.saveUserDetails(correo, "prueba", true);
+				userProperties.saveUserDetails(cliente.getNombre(), cliente.getApellido(), String.valueOf(cliente.getFch_nac()), cliente.getCorreo(), cliente.getTelefono(), cliente.isAfiliado(), cliente.isAcept_publi(), true);
 				// Cierra la ventana de inicio
 				Node source = (Node) event.getSource();
 				Stage stage = (Stage) source.getScene().getWindow();

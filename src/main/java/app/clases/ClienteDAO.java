@@ -1,6 +1,7 @@
 package app.clases;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,6 +82,48 @@ public class ClienteDAO {
 	}
 
 	/**
+	 * Modifica el valor del campo dado del cliente
+	 * 
+	 * @param con     La conexión a la base de datos.
+	 * @return 1 si la inserción fue exitosa, 0 en caso contrario.
+	 */
+	public static void updateField(Connection con, String correo, String field, String newValue) {
+	    try {
+	        String sql = "UPDATE clientes SET " + field + " = ? WHERE correo = ?";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setString(1, newValue);
+	        ps.setString(2, correo);
+	        ps.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	public static void updateField(Connection con, String correo, String field, boolean newValue) {
+	    try {
+	        String sql = "UPDATE clientes SET " + field + " = ? WHERE correo = ?";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setBoolean(1, newValue);
+	        ps.setString(2, correo);
+	        ps.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	public static void updateField(Connection con, String correo, String field, Date newValue) {
+	    try {
+	        String sql = "UPDATE clientes SET " + field + " = ? WHERE correo = ?";
+	        PreparedStatement ps = con.prepareStatement(sql);
+	        ps.setDate(1, newValue);
+	        ps.setString(2, correo);
+	        ps.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	/**
 	 * Carga los detalles de un cliente de la base de datos.
 	 *
 	 * @param con La conexión a la base de datos.
@@ -89,12 +132,12 @@ public class ClienteDAO {
 	 *         el cliente no existe.
 	 */
 
-	// Cargar todos los datos del cliente con la id
-	public static ClienteDO loadCliente(Connection con, int id) {
+	// Cargar todos los datos del cliente con el correo
+	public static ClienteDO loadCliente(Connection con, String correo) {
 		try {
-			String sql = "SELECT * FROM clientes WHERE idclientes = ?";
+			String sql = "SELECT * FROM clientes WHERE correo = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, id);
+			ps.setString(1, correo);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new ClienteDO(rs.getInt("idclientes"), rs.getString("nombre"), rs.getString("apellido"),
