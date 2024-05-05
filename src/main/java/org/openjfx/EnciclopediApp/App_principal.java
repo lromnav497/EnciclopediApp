@@ -45,6 +45,23 @@ public class App_principal {
         MenuBar menuBar = new MenuBar();
         Menu perfilMenu = new Menu("Perfil");
         MenuItem customizeItem = new MenuItem("Modificar");
+        customizeItem.setOnAction(e -> {
+        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifView.fxml"));
+        	try {
+				Parent root3 = fxmlLoader.load();
+				Stage newstage = new Stage();
+				newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
+				newstage.setTitle("EnciclopediApp - View");
+				newstage.setScene(new Scene(root3));
+				newstage.setResizable(false);
+				newstage.show();
+				primaryStage.close();
+				userProperties.saveUserDetails("", "","","","",false,false, false);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+        });
         Menu ayudaMenu = new Menu("Ayuda");
         
         MenuItem logoutItem = new MenuItem("Cerrar sesión");
