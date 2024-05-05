@@ -29,11 +29,6 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-private void showProfileSettings() {
-    ProfileSettingsWindow settingsWindow = new ProfileSettingsWindow();
-    settingsWindow.showAndWait();
-}
-
 public class App_principal {
 
 	private UserProperties userProperties = new UserProperties();
@@ -49,9 +44,7 @@ public class App_principal {
         // Crear menú
         MenuBar menuBar = new MenuBar();
         Menu perfilMenu = new Menu("Perfil");
-        MenuItem customizeItem = new MenuItem("M");
-        customizeItem.setOnAction(e -> showProfileSettings());
-        profileMenu.getItems().addAll(customizeItem);
+        MenuItem customizeItem = new MenuItem("Modificar");
         
         MenuItem logoutItem = new MenuItem("Log Out");
 		logoutItem.setOnAction(e -> {
