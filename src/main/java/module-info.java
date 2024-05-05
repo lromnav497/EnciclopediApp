@@ -5,6 +5,7 @@ module org.openjfx.EnciclopediApp {
 	requires javafx.graphics;
 	requires java.desktop;
 	requires javafx.web;
+	requires java.mail;
 
 	opens org.openjfx.EnciclopediApp to javafx.fxml;
 

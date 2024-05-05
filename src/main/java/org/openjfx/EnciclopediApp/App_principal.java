@@ -88,7 +88,20 @@ public class App_principal {
 		
 		MenuItem soporteItem = new MenuItem("Soporte");
 		soporteItem.setOnAction(e -> {
-			
+			try {
+				// Abre la ventana principal
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("emailform.fxml"));
+				Parent root2 = fxmlLoader.load();
+				Stage newstage = new Stage();
+				newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
+				newstage.setTitle("EnciclopediApp - Soporte");
+				newstage.initModality(Modality.APPLICATION_MODAL);
+				newstage.setScene(new Scene(root2));
+				newstage.setResizable(false);
+				newstage.show();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		});
 		
 		ayudaMenu.getItems().addAll(acercaDeItem,manualItem,soporteItem);
@@ -115,8 +128,8 @@ public class App_principal {
         perfilMenu.getItems().addAll(configItem, prefsItem);
         menuBar.getMenus().addAll(perfilMenu, ayudaMenu);
         customizeItem.setOnAction(e -> {
-        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifView.fxml"));
         	try {
+        		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifView.fxml"));
 				Parent root3 = fxmlLoader.load();
 				Stage newstage = new Stage();
 				newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
@@ -125,7 +138,6 @@ public class App_principal {
 				newstage.setResizable(false);
 				newstage.show();
 				primaryStage.close();
-				userProperties.saveUserDetails("", "","","","",false,false, false);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
