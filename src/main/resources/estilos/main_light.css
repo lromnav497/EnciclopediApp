@@ -1,0 +1,38 @@
+.root {
+    -fx-font-family: "Roboto", sans-serif;
+    -fx-base: #ffffff;
+}
+
+.button {
+    -fx-font-size: 14pt;
+    -fx-background-color: #1565c0;
+    -fx-text-fill: #000000;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 5, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: #0d47a1;
+    -fx-cursor: hand;
+    -fx-transition: background-color 0.3s ease-in-out;
+}
+
+.label {
+    -fx-font-size: 14pt;
+    -fx-text-fill: #000000;
+}
+
+.grid-pane {
+    -fx-hgap: 10px;
+    -fx-vgap: 10px;
+}
+
+.menu-bar {
+    -fx-background-color: #e0e0e0;
+}
+
+.menu-bar .label {
+    -fx-text-fill: #000000;
+}

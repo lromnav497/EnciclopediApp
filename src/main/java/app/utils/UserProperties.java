@@ -12,7 +12,8 @@ public class UserProperties {
 	private Properties config = new Properties();
 	String homeDir = System.getProperty("user.home");
 
-	public void saveUserDetails(String nombre, String apellido, String fechaNacimiento, String email, String telefono, boolean isAfiliado, boolean isAceptaPublicidad, boolean isLoggedIn) {
+	public void saveUserDetails(String nombre, String apellido, String fechaNacimiento, String email, String telefono,
+			boolean isAfiliado, boolean isAceptaPublicidad, boolean isLoggedIn, boolean isdark_mode) {
 		config.setProperty("nombre", nombre);
 		config.setProperty("apellido", apellido);
 		config.setProperty("fechaNacimiento", fechaNacimiento);
@@ -21,8 +22,10 @@ public class UserProperties {
 		config.setProperty("isAfiliado", String.valueOf(isAfiliado));
 		config.setProperty("isAceptaPublicidad", String.valueOf(isAceptaPublicidad));
 		config.setProperty("isLoggedIn", String.valueOf(isLoggedIn));
+		config.setProperty("isdark_mode", String.valueOf(isdark_mode));
 		try {
-			FileOutputStream out = new FileOutputStream(homeDir + File.separator + "EnciclopediApp" + File.separator + "user.properties");
+			FileOutputStream out = new FileOutputStream(
+					homeDir + File.separator + "EnciclopediApp" + File.separator + "user.properties");
 			config.store(out, null);
 			out.close();
 		} catch (IOException e) {
@@ -33,7 +36,8 @@ public class UserProperties {
 	public String[] loadUserDetails() {
 		String[] datos = new String[7];
 		try {
-			FileInputStream in = new FileInputStream(homeDir + File.separator + "EnciclopediApp" + File.separator + "user.properties");
+			FileInputStream in = new FileInputStream(
+					homeDir + File.separator + "EnciclopediApp" + File.separator + "user.properties");
 			config.load(in);
 			in.close();
 			datos[0] = config.getProperty("nombre", "");
@@ -57,5 +61,9 @@ public class UserProperties {
 
 	public boolean isLoggedIn() {
 		return Boolean.parseBoolean(config.getProperty("isLoggedIn", "false"));
+	}
+
+	public boolean isdark_mode() {
+		return Boolean.parseBoolean(config.getProperty("dark_mode", "false"));
 	}
 }

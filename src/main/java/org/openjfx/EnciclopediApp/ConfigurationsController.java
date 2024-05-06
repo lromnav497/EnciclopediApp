@@ -1,25 +1,16 @@
 package org.openjfx.EnciclopediApp;
 
-import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 import app.clases.ClienteDAO;
-import app.clases.ClienteDO;
 import app.utils.ConectarBD;
 import app.utils.UserProperties;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 /**
  * La clase RegisterController gestiona las acciones del usuario en la pantalla
@@ -31,7 +22,6 @@ import javafx.stage.Stage;
 public class ConfigurationsController {
 
 	private UserProperties userProperties = new UserProperties();
-	
 
 	// Obtener los valores del formulario
 	@FXML
@@ -56,7 +46,7 @@ public class ConfigurationsController {
 	private Label errorLabel_telefono;
 	@FXML
 	private Label errorLabel_info;
-	
+
 	/**
 	 * Este método se encarga de la lógica de registro del usuario. Verifica los
 	 * datos del formulario y, si son correctos, guarda los detalles del usuario y
@@ -64,10 +54,10 @@ public class ConfigurationsController {
 	 *
 	 * @param event El evento que desencadenó la llamada a este método.
 	 */
-	
+
 	@FXML
-    private void initialize() {
-        // Cargar el archivo de propiedades
+	private void initialize() {
+		// Cargar el archivo de propiedades
 		String[] propiedas = userProperties.loadUserDetails();
 
 		// Establecer los valores por defecto de los TextField
@@ -75,8 +65,8 @@ public class ConfigurationsController {
 		phone.setText(propiedas[4]);
 		afiliate.setSelected(Boolean.valueOf(propiedas[5]));
 		acceptAds.setSelected(Boolean.valueOf(propiedas[6]));
-    }
-	
+	}
+
 	@FXML
 	protected void Agregar_cambios(ActionEvent event) {
 		String[] propiedas = userProperties.loadUserDetails();
@@ -140,7 +130,13 @@ public class ConfigurationsController {
 					ClienteDAO.updateField(con, propiedas[3], "afiliado", afiliado);
 					ClienteDAO.updateField(con, propiedas[3], "acept_publi", acept_publi);
 					ClienteDAO.updateField(con, propiedas[3], "correo", correo);
-					userProperties.saveUserDetails(propiedas[0], propiedas[1], propiedas[2], correo, telefono, afiliado, acept_publi, true);
+					if (userProperties.isdark_mode()) {
+						userProperties.saveUserDetails(propiedas[0], propiedas[1], propiedas[2], correo, telefono,
+								afiliado, acept_publi, true, true);
+					} else {
+						userProperties.saveUserDetails(propiedas[0], propiedas[1], propiedas[2], correo, telefono,
+								afiliado, acept_publi, true, false);
+					}
 				} else {
 
 				}

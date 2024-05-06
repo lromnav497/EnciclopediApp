@@ -68,8 +68,8 @@ public class LibroDAO {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new LibroDO(rs.getInt("idlibros"), rs.getString("nombre"), rs.getString("categoria"),
-						rs.getString("autor"), rs.getString("editorial"), rs.getDate("fch_publi"), rs.getDouble("precio"),
-						rs.getString("imagen"));
+						rs.getString("autor"), rs.getString("editorial"), rs.getDate("fch_publi"),
+						rs.getDouble("precio"), rs.getString("imagen"));
 			} else {
 				return null;
 			}
@@ -91,6 +91,9 @@ public class LibroDAO {
 				libro.setNombre(rs.getString("nombre"));
 				libro.setAutor(rs.getString("autor"));
 				libro.setCategoria(rs.getString("categoria"));
+				libro.setEditorial(rs.getString("editorial"));
+				libro.setFch_publi(rs.getDate("fch_publi"));
+				libro.setPrecio(rs.getDouble("precio"));
 				libro.setImagen(rs.getString("imagen"));
 				libros.add(libro);
 			}

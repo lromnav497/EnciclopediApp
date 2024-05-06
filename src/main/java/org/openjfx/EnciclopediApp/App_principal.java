@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -20,7 +21,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -35,20 +35,20 @@ public class App_principal {
 
 	public void showMainWindow() {
 		// Conectar con la bd
-    	Connection con = ConectarBD.conectarBD();
+		Connection con = ConectarBD.conectarBD();
 
-    	Stage primaryStage = new Stage();
-    	primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
-    	primaryStage.setTitle("EnciclopediApp");
-    	
-        // Crear menú
-        MenuBar menuBar = new MenuBar();
-        Menu perfilMenu = new Menu("Perfil");
-        MenuItem customizeItem = new MenuItem("Modificar");
-        
-        Menu ayudaMenu = new Menu("Ayuda");
-        
-        MenuItem logoutItem = new MenuItem("Cerrar sesión");
+		Stage primaryStage = new Stage();
+		primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
+		primaryStage.setTitle("EnciclopediApp");
+
+		// Crear menú
+		MenuBar menuBar = new MenuBar();
+		Menu perfilMenu = new Menu("Perfil");
+		MenuItem customizeItem = new MenuItem("Modificar");
+
+		Menu ayudaMenu = new Menu("Ayuda");
+
+		MenuItem logoutItem = new MenuItem("Cerrar sesión");
 		logoutItem.setOnAction(e -> {
 			try {
 				// Abre la ventana principal
@@ -61,13 +61,13 @@ public class App_principal {
 				newstage.setResizable(false);
 				newstage.show();
 				primaryStage.close();
-				userProperties.saveUserDetails("", "","","","",false,false, false);
+				userProperties.saveUserDetails("", "", "", "", "", false, false, false, false);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		});
 		perfilMenu.getItems().add(logoutItem);
-		
+
 		MenuItem acercaDeItem = new MenuItem("Acerca de");
 		acercaDeItem.setOnAction(e -> {
 			WebView webView = new WebView();
@@ -80,12 +80,11 @@ public class App_principal {
 			githubStage.show();
 		});
 
-		
 		MenuItem manualItem = new MenuItem("Manual");
 		manualItem.setOnAction(e -> {
-			
+
 		});
-		
+
 		MenuItem soporteItem = new MenuItem("Soporte");
 		soporteItem.setOnAction(e -> {
 			try {
@@ -103,10 +102,10 @@ public class App_principal {
 				e1.printStackTrace();
 			}
 		});
-		
-		ayudaMenu.getItems().addAll(acercaDeItem,manualItem,soporteItem);
-		
-		 MenuItem configItem = new MenuItem("Configuración");
+
+		ayudaMenu.getItems().addAll(acercaDeItem, manualItem, soporteItem);
+
+		MenuItem configItem = new MenuItem("Configuración");
 		configItem.setOnAction(e -> {
 			try {
 				// Abre la ventana principal
@@ -124,16 +123,16 @@ public class App_principal {
 			}
 		});
 
-        MenuItem prefsItem = new MenuItem("Preferencias");
-        perfilMenu.getItems().addAll(configItem, prefsItem);
-        menuBar.getMenus().addAll(perfilMenu, ayudaMenu);
-        customizeItem.setOnAction(e -> {
-        	try {
-        		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("modifView.fxml"));
+		MenuItem prefsItem = new MenuItem("Preferencias");
+		perfilMenu.getItems().addAll(configItem, prefsItem);
+		menuBar.getMenus().addAll(perfilMenu, ayudaMenu);
+		customizeItem.setOnAction(e -> {
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("preferencias.fxml"));
 				Parent root3 = fxmlLoader.load();
 				Stage newstage = new Stage();
 				newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
-				newstage.setTitle("EnciclopediApp - View");
+				newstage.setTitle("EnciclopediApp - Preferencias");
 				newstage.setScene(new Scene(root3));
 				newstage.setResizable(false);
 				newstage.show();
@@ -142,113 +141,137 @@ public class App_principal {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-        });
+		});
 
-     // Crear el GridPane
-        GridPane grid = new GridPane();
-        grid.setHgap(10); // Espacio horizontal entre las celdas
-        grid.setVgap(10); // Espacio vertical entre las celdas
+		// Crear el GridPane
+		GridPane grid = new GridPane();
+		grid.setHgap(10); // Espacio horizontal entre las celdas
+		grid.setVgap(10); // Espacio vertical entre las celdas
 
-        try {
-            List<LibroDO> libros = LibroDAO.getLibros(con);
+		ScrollPane scrollPane = new ScrollPane();
+		scrollPane.setContent(grid); // Asegúrate de que el GridPane se añade al ScrollPane
+		scrollPane.setFitToWidth(true);
 
-            int row = 0;
-            int column = 0;
+		VBox root = new VBox();
+		root.getChildren().add(scrollPane);
 
-            for (LibroDO libro : libros) {
-                try {
-                    Image image = new Image(getClass().getResourceAsStream("img" + "/" + libro.getImagen()));
-                    ImageView logo = new ImageView();
-                    logo.setFitWidth(100);
-                    logo.setFitHeight(100);
-                    logo.setImage(image);
-                    logo.setPreserveRatio(true);
+		VBox detallesPanel = new VBox();
+		detallesPanel.getChildren().add(new Label("Detalles"));
+		// Aquí puedes agregar los detalles del libro seleccionado
 
-                    Label nombre = new Label(libro.getNombre());
-                    Label autor = new Label(libro.getAutor());
-                    Label precio = new Label(String.valueOf(libro.getPrecio()));
-                    Button comprarBtn = new Button("Comprar");
-                    Button verBtn = new Button("Ver");
+		// Dividir la ventana en dos
+		SplitPane splitPane = new SplitPane();
+		splitPane.getItems().addAll(root, detallesPanel);
 
-                    VBox libroPanel = new VBox();
-                    libroPanel.setPrefHeight(200); // Establece una altura preferida para cada panel de libro
-                    libroPanel.setMaxHeight(200); // Establece una altura máxima para cada panel de libro
-                    libroPanel.getChildren().addAll(logo,nombre, autor, precio, comprarBtn, verBtn);
+		try {
+			List<LibroDO> libros = LibroDAO.getLibros(con);
 
-                    grid.add(libroPanel, column, row);
+			int row = 0;
+			int column = 0;
 
-                    column++;
-                    if (column > 3) { // Cambia este número según el número de columnas que desees
-                        column = 0;
-                        row++;
-                    }
+			for (LibroDO libro : libros) {
+				try {
+					Image image = new Image(getClass().getResourceAsStream("img" + "/" + libro.getImagen()));
+					ImageView logo = new ImageView();
+					logo.setFitWidth(100);
+					logo.setFitHeight(100);
+					logo.setImage(image);
+					logo.setPreserveRatio(true);
 
-                } catch (Exception e) {
-                    Image image = new Image(getClass().getResourceAsStream("img/oops.png"));
-                    ImageView logo = new ImageView();
-                    logo.setFitWidth(100);
-                    logo.setFitHeight(100);
-                    logo.setImage(image);
-                    logo.setPreserveRatio(true);
+					Label nombre = new Label(libro.getNombre());
+					Label autor = new Label(libro.getAutor());
+					Label precio = new Label(String.valueOf(libro.getPrecio()) + "€");
+					Button comprarBtn = new Button("Comprar");
+					Button verBtn = new Button("Ver");
+					verBtn.setOnAction(event -> {
+						detallesPanel.getChildren().clear(); // Limpia el panel de detalles
+						detallesPanel.getChildren().add(new Label("Nombre: " + libro.getNombre()));
+						detallesPanel.getChildren().add(new Label("Categoria: " + libro.getCategoria()));
+						detallesPanel.getChildren().add(new Label("Autor: " + libro.getAutor()));
+						detallesPanel.getChildren().add(new Label("Editorial: " + libro.getEditorial()));
+						detallesPanel.getChildren()
+								.add(new Label("Fecha de publicación: " + String.valueOf(libro.getFch_publi())));
+						detallesPanel.getChildren().add(new Label(
+								"Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim, elit non elementum feugiat, ligula elit viverra erat, pellentesque congue eros dolor ac nulla. Mauris sed magna finibus, mattis lorem vitae, ornare lorem. Maecenas gravida, ipsum non bibendum tincidunt, orci libero sodales augue, et interdum ante diam et nulla. Nunc ac nisl tincidunt, pretium ante a, tincidunt sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer iaculis suscipit varius. Pellentesque efficitur convallis lobortis. In dictum consequat neque sed mollis."));
+						detallesPanel.getChildren().add(new Label("Total precio: " + libro.getPrecio() + "€"));
+					});
 
-                    Label nombre = new Label(libro.getNombre());
-                    Label autor = new Label(libro.getAutor());
-                    Label precio = new Label(String.valueOf(libro.getPrecio()));
-                    Button comprarBtn = new Button("Comprar");
-                    Button verBtn = new Button("Ver");
+					VBox libroPanel = new VBox();
+					libroPanel.setPrefHeight(200); // Establece una altura preferida para cada panel de libro
+					libroPanel.setMaxHeight(200); // Establece una altura máxima para cada panel de libro
+					libroPanel.getChildren().addAll(logo, nombre, autor, precio, comprarBtn, verBtn);
 
-                    VBox libroPanel = new VBox();
-                    libroPanel.setPrefHeight(200); // Establece una altura preferida para cada panel de libro
-                    libroPanel.setMaxHeight(200); // Establece una altura máxima para cada panel de libro
-                    libroPanel.getChildren().addAll(logo,nombre, autor, precio, comprarBtn, verBtn);
+					grid.add(libroPanel, column, row);
 
-                    grid.add(libroPanel, column, row);
+					column++;
+					if (column > 3) { // Cambia este número según el número de columnas que desees
+						column = 0;
+						row++;
+					}
 
-                    column++;
-                    if (column > 3) { // Cambia este número según el número de columnas que desees
-                        column = 0;
-                        row++;
-                    }
-                }
-            }
+				} catch (Exception e) {
+					Image image = new Image(getClass().getResourceAsStream("img/oops.png"));
+					ImageView logo = new ImageView();
+					logo.setFitWidth(100);
+					logo.setFitHeight(100);
+					logo.setImage(image);
+					logo.setPreserveRatio(true);
 
-            con.close();
+					Label nombre = new Label(libro.getNombre());
+					Label autor = new Label(libro.getAutor());
+					Label precio = new Label(String.valueOf(libro.getPrecio()) + "€");
+					Button comprarBtn = new Button("Comprar");
+					Button verBtn = new Button("Ver");
+					verBtn.setOnAction(event -> {
+						detallesPanel.getChildren().clear(); // Limpia el panel de detalles
+						detallesPanel.getChildren().add(new Label("Nombre: " + libro.getNombre()));
+						detallesPanel.getChildren().add(new Label("Categoria: " + libro.getCategoria()));
+						detallesPanel.getChildren().add(new Label("Autor: " + libro.getAutor()));
+						detallesPanel.getChildren().add(new Label("Editorial: " + libro.getEditorial()));
+						detallesPanel.getChildren().add(new Label("Fecha de publicación: " + libro.getFch_publi()));
+						detallesPanel.getChildren().add(new Label(
+								"Descripción: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim, elit non elementum feugiat, ligula elit viverra erat, pellentesque congue eros dolor ac nulla. Mauris sed magna finibus, mattis lorem vitae, ornare lorem. Maecenas gravida, ipsum non bibendum tincidunt, orci libero sodales augue, et interdum ante diam et nulla. Nunc ac nisl tincidunt, pretium ante a, tincidunt sem. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer iaculis suscipit varius. Pellentesque efficitur convallis lobortis. In dictum consequat neque sed mollis."));
+						detallesPanel.getChildren().add(new Label("Total precio: " + libro.getPrecio() + "€"));
+					});
 
-            ScrollPane scrollPane = new ScrollPane();
-            scrollPane.setContent(grid); // Asegúrate de que el GridPane se añade al ScrollPane
-            scrollPane.setFitToWidth(true);
+					VBox libroPanel = new VBox();
+					libroPanel.setPrefHeight(200); // Establece una altura preferida para cada panel de libro
+					libroPanel.setMaxHeight(200); // Establece una altura máxima para cada panel de libro
+					libroPanel.getChildren().addAll(logo, nombre, autor, precio, comprarBtn, verBtn);
 
+					grid.add(libroPanel, column, row);
 
-            VBox root = new VBox();
-            root.getChildren().add(scrollPane);
+					column++;
+					if (column > 3) { // Cambia este número según el número de columnas que desees
+						column = 0;
+						row++;
+					}
+				}
+			}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("Error Dialog");
-            alert.setHeaderText("Error de SQL");
-            alert.setContentText("Ocurrió un error al obtener los libros de la base de datos.");
+			con.close();
 
-            alert.showAndWait();
-        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Error Dialog");
+			alert.setHeaderText("Error de SQL");
+			alert.setContentText("Ocurrió un error al obtener los libros de la base de datos.");
 
+			alert.showAndWait();
+		}
 
+		// Añadir menú y paneles al layout principal
+		VBox mainLayout = new VBox();
+		mainLayout.getChildren().addAll(menuBar, splitPane);
 
-        VBox detallesPanel = new VBox();
-        detallesPanel.getChildren().add(new Label("Detalles"));
-        // Aquí puedes agregar los detalles del libro seleccionado
-
-        // Dividir la ventana en dos
-        SplitPane splitPane = new SplitPane();
-        splitPane.getItems().addAll(grid, detallesPanel);
-
-        // Añadir menú y paneles al layout principal
-        VBox mainLayout = new VBox();
-        mainLayout.getChildren().addAll(menuBar, splitPane);
-        
-        Scene scene = new Scene(mainLayout, 800, 600);
-        scene.getStylesheets().add(getClass().getResource("/estilos/pruebadeprueba.css").toExternalForm());
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+		Scene scene = new Scene(mainLayout, 800, 600);
+		if (userProperties.isdark_mode()) {
+			scene.getStylesheets().add(getClass().getResource("/estilos/main_oscuro.css").toExternalForm());
+		} else {
+			scene.getStylesheets().add(getClass().getResource("/estilos/main_light.css").toExternalForm());
+		}
+		primaryStage.setScene(scene);
+		primaryStage.show();
+	}
 }

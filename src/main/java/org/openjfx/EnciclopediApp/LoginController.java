@@ -60,7 +60,9 @@ public class LoginController {
 			if (usuarioExiste) {
 				ClienteDO cliente = ClienteDAO.loadCliente(con, correo);
 				errorLabel.setVisible(false);
-				userProperties.saveUserDetails(cliente.getNombre(), cliente.getApellido(), String.valueOf(cliente.getFch_nac()), cliente.getCorreo(), cliente.getTelefono(), cliente.isAfiliado(), cliente.isAcept_publi(), true);
+				userProperties.saveUserDetails(cliente.getNombre(), cliente.getApellido(),
+						String.valueOf(cliente.getFch_nac()), cliente.getCorreo(), cliente.getTelefono(),
+						cliente.isAfiliado(), cliente.isAcept_publi(), true, false);
 				// Cierra la ventana de inicio
 				Node source = (Node) event.getSource();
 				Stage stage = (Stage) source.getScene().getWindow();

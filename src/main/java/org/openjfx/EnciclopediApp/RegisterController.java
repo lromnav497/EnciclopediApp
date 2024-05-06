@@ -146,7 +146,8 @@ public class RegisterController {
 				if (comprobaciones[0] == true && comprobaciones[1] == true && comprobaciones[2] == true
 						&& comprobaciones[3] == true) {
 					Date fecha_nac_format = Date.valueOf(fch_nac.getValue());
-					userProperties.saveUserDetails(name, surname, fecha_nac, email, phone, afiliate, acept_publi, true);
+					userProperties.saveUserDetails(name, surname, fecha_nac, email, phone, afiliate, acept_publi, true,
+							false);
 					// Cierra la ventana de registro
 					Node source = (Node) event.getSource();
 					Stage stage = (Stage) source.getScene().getWindow();
