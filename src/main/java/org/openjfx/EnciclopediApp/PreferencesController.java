@@ -1,24 +1,33 @@
 package org.openjfx.EnciclopediApp;
 
 import app.utils.UserProperties;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
 
 public class PreferencesController {
 
 	private UserProperties userProperties = new UserProperties();
 
 	@FXML
-	private ToggleButton themeToggleButton;
+	private ChoiceBox<String> themeChoiceBox;
 
 	@FXML
 	public void initialize() {
 		// Inicializar el estado del botón de acuerdo al tema actual
-		themeToggleButton.setSelected(isDarkMode());
+		themeChoiceBox.setItems(FXCollections.observableArrayList("Modo claro", "Modo oscuro"));
 
-		// Cambiar el tema cuando se presiona el botón
-		themeToggleButton.setOnAction(e -> {
-			if (themeToggleButton.isSelected()) {
+		// Detectar si el tema actual es oscuro o claro
+		if (isDarkMode()) {
+			themeChoiceBox.getSelectionModel().select("Modo oscuro");
+		} else {
+			themeChoiceBox.getSelectionModel().select("Modo claro");
+		}
+
+		// Cambiar el tema cuando se selecciona una opción en el ChoiceBox
+		themeChoiceBox.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> {
+			if (newValue.equals("Modo oscuro")) {
 				setDarkMode();
 			} else {
 				setLightMode();
@@ -27,6 +36,7 @@ public class PreferencesController {
 	}
 
 	private boolean isDarkMode() {
+		userProperties.loadUserDetails();
 		return userProperties.isdark_mode(); // Cambiar por el valor real
 	}
 
@@ -37,6 +47,9 @@ public class PreferencesController {
 				Boolean.valueOf(propiedas[5]), Boolean.valueOf(propiedas[6]), true, true);
 		App_principal mainApp = new App_principal();
 		mainApp.showMainWindow();
+		// Cierra la ventana de inicio
+		Stage stage = (Stage) themeChoiceBox.getScene().getWindow();
+		stage.close();
 	}
 
 	// Método para cambiar a modo claro
@@ -46,6 +59,9 @@ public class PreferencesController {
 				Boolean.valueOf(propiedas[5]), Boolean.valueOf(propiedas[6]), true, false);
 		App_principal mainApp = new App_principal();
 		mainApp.showMainWindow();
+		// Cierra la ventana de inicio
+		Stage stage = (Stage) themeChoiceBox.getScene().getWindow();
+		stage.close();
 	}
 
 }

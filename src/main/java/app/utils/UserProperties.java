@@ -64,6 +64,6 @@ public class UserProperties {
 	}
 
 	public boolean isdark_mode() {
-		return Boolean.parseBoolean(config.getProperty("dark_mode", "false"));
+		return Boolean.parseBoolean(config.getProperty("isdark_mode", "false"));
 	}
 }

@@ -44,7 +44,6 @@ public class App_principal {
 		// Crear menú
 		MenuBar menuBar = new MenuBar();
 		Menu perfilMenu = new Menu("Perfil");
-		MenuItem customizeItem = new MenuItem("Modificar");
 
 		Menu ayudaMenu = new Menu("Ayuda");
 
@@ -124,9 +123,7 @@ public class App_principal {
 		});
 
 		MenuItem prefsItem = new MenuItem("Preferencias");
-		perfilMenu.getItems().addAll(configItem, prefsItem);
-		menuBar.getMenus().addAll(perfilMenu, ayudaMenu);
-		customizeItem.setOnAction(e -> {
+		prefsItem.setOnAction(e -> {
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("preferencias.fxml"));
 				Parent root3 = fxmlLoader.load();
@@ -142,6 +139,9 @@ public class App_principal {
 				e1.printStackTrace();
 			}
 		});
+
+		perfilMenu.getItems().addAll(configItem, prefsItem);
+		menuBar.getMenus().addAll(perfilMenu, ayudaMenu);
 
 		// Crear el GridPane
 		GridPane grid = new GridPane();
@@ -266,6 +266,7 @@ public class App_principal {
 		mainLayout.getChildren().addAll(menuBar, splitPane);
 
 		Scene scene = new Scene(mainLayout, 800, 600);
+		userProperties.loadUserDetails();
 		if (userProperties.isdark_mode()) {
 			scene.getStylesheets().add(getClass().getResource("/estilos/main_oscuro.css").toExternalForm());
 		} else {

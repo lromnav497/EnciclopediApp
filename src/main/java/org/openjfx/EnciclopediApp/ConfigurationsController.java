@@ -13,8 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
- * La clase RegisterController gestiona las acciones del usuario en la pantalla
- * de registro.
+ * La clase ConfigurationsController gestiona las acciones del usuario en la
+ * pantalla de configuraciones.
  * 
  * @author Luis Carlos Romero Y Francisco Audino
  */
@@ -48,9 +48,9 @@ public class ConfigurationsController {
 	private Label errorLabel_info;
 
 	/**
-	 * Este método se encarga de la lógica de registro del usuario. Verifica los
-	 * datos del formulario y, si son correctos, guarda los detalles del usuario y
-	 * abre la ventana principal.
+	 * Este método se encarga de la lógica de configuración del usuario. Verifica
+	 * los datos del formulario y, si son correctos, actualiza los detalles del
+	 * usuario.
 	 *
 	 * @param event El evento que desencadenó la llamada a este método.
 	 */
