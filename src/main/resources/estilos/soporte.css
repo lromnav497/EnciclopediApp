@@ -1,0 +1,48 @@
+/* Estilos generales */
+.root {
+	/* Configura la fuente y la imagen de fondo para el contenedor principal */
+    -fx-font-family: 'Arial';
+    -fx-background-image: url('../img/background.png');
+    -fx-background-repeat: stretch;   
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+}
+
+/* Estilos para las etiquetas */
+.label {
+    -fx-font-size: 14px; /* Tamaño de fuente para las etiquetas */
+    -fx-text-fill: #fff; /* Color de texto oscuro para mejor contraste */
+    -fx-font-weight: bold; /* Hacer el texto en negrita */
+}
+
+/* Estilos para los campos de texto y área de texto */
+.text-field, .text-area {
+    -fx-border-color: #ccc; /* Color de borde gris claro */
+    -fx-border-radius: 4; /* Bordes ligeramente redondeados */
+    -fx-effect: dropshadow(one-pass-box, rgba(0,0,0,0.05), 3, 0.0, 0, 1); /* Sombra suave */
+}
+
+.text-field:focused, .text-area:focused {
+    -fx-border-color: #4a90e2; /* Color de borde azul al enfocar */
+}
+
+/* Estilos para el botón de enviar */
+.button {
+    -fx-background-color: #4a90e2; /* Color de fondo azul para el botón */
+    -fx-text-fill: white; /* Texto en color blanco */
+    -fx-border-color: transparent; /* Sin borde */
+    -fx-border-radius: 4; /* Bordes redondeados */
+    -fx-cursor: hand; /* Cursor de mano al pasar por encima */
+}
+
+.button:hover {
+    -fx-background-color: #569ad3; /* Color de fondo más claro al pasar el ratón por encima */
+}
+
+/* Estilos para la etiqueta de error */
+.error-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #d9534f; /* Color rojo para errores */
+    -fx-font-weight: bold;
+    -fx-visibility: false; /* Ocultar inicialmente */
+}

@@ -14,6 +14,7 @@
 	/* Define el tamaño de fuente y el margen para las etiquetas de título */
     -fx-font-size: 13px;
     -fx-margin-bottom: 20;
+    -fx-font-weight: bold; /* Hacer el texto en negrita */
 }
 
 .error-label {
