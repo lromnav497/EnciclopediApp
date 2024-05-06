@@ -2,6 +2,10 @@ package app.clases;
 
 import java.sql.Date;
 
+/**
+ * La clase LibroDO representa a un libro en la base de datos.
+ */
+
 public class LibroDO {
 	private int idlibros;
 	private String nombre;
@@ -17,6 +21,19 @@ public class LibroDO {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor de la clase LibroDO.
+	 *
+	 * @param idlibros El ID del libro.
+	 * @param nombre El nombre del libro.
+	 * @param categoria La categoría del libro.
+	 * @param autor El autor del libro.
+	 * @param editorial La editorial del libro.
+	 * @param fch_publi La fecha de publicación del libro.
+	 * @param precio El precio del libro.
+	 * @param imagen La imagen del libro.
+	 */
+	
 	public LibroDO(int idlibros, String nombre, String categoria, String autor, String editorial, Date fch_publi,
 			Double precio, String imagen) {
 		super();

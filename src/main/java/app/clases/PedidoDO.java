@@ -2,6 +2,10 @@ package app.clases;
 
 import java.sql.Date;
 
+/**
+ * La clase PedidoDO representa a un pedido en la base de datos.
+ */
+
 public class PedidoDO {
 	private int idpedidos;
 	private String contenido;
@@ -13,6 +17,15 @@ public class PedidoDO {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor de la clase PedidoDO.
+	 *
+	 * @param idpedidos El ID del pedido.
+	 * @param contenido El contenido del pedido.
+	 * @param fch_compra La fecha de compra del pedido.
+	 * @param total_precio El precio total del pedido.
+	 */
+	
 	public PedidoDO(int idpedidos, String contenido, Date fch_compra, double total_precio) {
 		super();
 		this.idpedidos = idpedidos;

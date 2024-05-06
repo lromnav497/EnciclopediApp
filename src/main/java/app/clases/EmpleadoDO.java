@@ -2,6 +2,10 @@ package app.clases;
 
 import java.sql.Date;
 
+/**
+ * La clase EmpleadoDO representa a un empleado en la base de datos.
+ */
+
 public class EmpleadoDO {
 	private int idempleados;
 	private String nombre;
@@ -17,6 +21,19 @@ public class EmpleadoDO {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor de la clase EmpleadoDO.
+	 *
+	 * @param idempleados El ID del empleado.
+	 * @param nombre El nombre del empleado.
+	 * @param apellido El apellido del empleado.
+	 * @param fch_nac La fecha de nacimiento del empleado.
+	 * @param correo El correo electrónico del empleado.
+	 * @param telefono El número de teléfono del empleado.
+	 * @param password La contraseña del empleado.
+	 * @param puesto El puesto del empleado.
+	 */
+	
 	public EmpleadoDO(int idempleados, String nombre, String apellido, Date fch_nac, String correo, String telefono,
 			String password, String puesto) {
 		super();

@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"app.clases"},{"l":"app.utils"},{"l":"org.openjfx.EnciclopediApp"}];updateSearchResults();

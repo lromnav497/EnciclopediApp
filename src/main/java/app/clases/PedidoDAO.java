@@ -7,7 +7,14 @@ import java.sql.SQLException;
 
 public class PedidoDAO {
 	
-	// Eliminar pedido
+	/**
+	 * Este método elimina un pedido de la base de datos.
+	 *
+	 * @param id El ID del pedido.
+	 * @param con La conexión a la base de datos.
+	 * @return 0 si la operación fue exitosa, -1 en caso de error.
+	 */
+	
 		public static int removePedido(int id, Connection con) {
 			try {
 				String sql = "DELETE FROM pedidos WHERE idpedidos = ?";
@@ -21,7 +28,14 @@ public class PedidoDAO {
 			}
 		}
 
-		// Insertar nuevos pedidos
+		/**
+		 * Este método inserta un nuevo pedido en la base de datos.
+		 *
+		 * @param pedido El objeto PedidoDO que contiene los datos del pedido.
+		 * @param con La conexión a la base de datos.
+		 * @return 1 si la operación fue exitosa, 0 en caso de error.
+		 */
+		
 		public static int insertPedido(PedidoDO pedido, Connection con) {
 			if (pedido == null || pedido.getContenido() == null
 					|| pedido.getFch_compra() == null || pedido.getTotal_precio() == -1) {
@@ -52,7 +66,14 @@ public class PedidoDAO {
 			}
 		}
 
-		// Cargar todos los datos del cliente con la id
+		/**
+		 * Este método carga los datos de un pedido desde la base de datos.
+		 *
+		 * @param con La conexión a la base de datos.
+		 * @param id El ID del pedido.
+		 * @return Un objeto PedidoDO que contiene los datos del pedido, o null si no se encontró el pedido.
+		 */
+		
 		public static PedidoDO loadPedido(Connection con, int id) {
 			try {
 				String sql = "SELECT * FROM pedidos WHERE idpedidos = ?";

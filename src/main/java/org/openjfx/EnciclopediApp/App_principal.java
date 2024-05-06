@@ -1,6 +1,12 @@
 package org.openjfx.EnciclopediApp;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
@@ -97,8 +103,32 @@ public class App_principal {
 
 		MenuItem manualItem = new MenuItem("Manual");
 		manualItem.setOnAction(e -> {
-
-		});
+			try {
+				if (Desktop.isDesktopSupported()) {
+		            // File in user working directory, System.getProperty("user.dir");
+		            File file = new File("manual.pdf");
+		            if (!file.exists()) {
+		                // In JAR
+		                InputStream inputStream = ClassLoader.getSystemClassLoader()
+		                                    .getResourceAsStream("manual.pdf");
+		                // Copy file
+		                OutputStream outputStream = new FileOutputStream(file);
+		                byte[] buffer = new byte[1024];
+		                int length;
+		                while ((length = inputStream.read(buffer)) > 0) {
+		                    outputStream.write(buffer, 0, length);
+		                }
+		                outputStream.close();
+		                inputStream.close();
+		            }
+		            // Open file
+		            Desktop.getDesktop().open(file);
+		        }
+			} catch (Exception e2) {
+				// TODO: handle exception
+			}
+			 
+        });
 
 		MenuItem soporteItem = new MenuItem("Soporte");
 		soporteItem.setOnAction(e -> {
@@ -145,6 +175,7 @@ public class App_principal {
 				Stage newstage = new Stage();
 				newstage.getIcons().add(new Image(getClass().getResourceAsStream("/img/logo.png")));
 				newstage.setTitle("EnciclopediApp - Preferencias");
+				newstage.initModality(Modality.APPLICATION_MODAL);
 				newstage.setScene(new Scene(root3));
 				newstage.setResizable(false);
 				newstage.show();

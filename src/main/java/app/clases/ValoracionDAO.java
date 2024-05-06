@@ -5,9 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * La clase ValoracionDAO se utiliza para interactuar con la tabla de valoraciones en la base de datos.
+ */
+
 public class ValoracionDAO {
 	
-	// Eliminar cliente
+	/**
+	 * Este método elimina una valoración de la base de datos.
+	 *
+	 * @param id El ID de la valoración.
+	 * @param con La conexión a la base de datos.
+	 * @return 0 si la operación fue exitosa, -1 en caso de error.
+	 */
+	
 		public static int removeValoracion(int id, Connection con) {
 			try {
 				String sql = "DELETE FROM valoraciones WHERE idvaloraciones = ?";
@@ -21,7 +32,14 @@ public class ValoracionDAO {
 			}
 		}
 
-		// Insertar nuevas valoraciones
+		/**
+		 * Este método inserta una nueva valoración en la base de datos.
+		 *
+		 * @param valoracion El objeto ValoracionDO que contiene los datos de la valoración.
+		 * @param con La conexión a la base de datos.
+		 * @return 1 si la operación fue exitosa, 0 en caso de error.
+		 */
+		
 		public static int insertValoracion(ValoracionDO valoracion, Connection con) {
 			if (valoracion == null || valoracion.getPuntaje() == 0 || valoracion.getComentario() == null
 					|| valoracion.getFch_publi() == null || valoracion.getClientes_idclientes() == 0) {
@@ -53,8 +71,16 @@ public class ValoracionDAO {
 				return 0;
 			}
 		}
+		
+		/**
+		 * Este método carga los datos de una valoración desde la base de datos.
+		 *
+		 * @param con La conexión a la base de datos.
+		 * @param id El ID de la valoración.
+		 * @return Un objeto ValoracionDO que contiene los datos de la valoración, o null si no se encontró la valoración.
+		 */
 
-		// Cargar todos los datos del cliente con la id
+		
 		public static ValoracionDO loadValoracion(Connection con, int id) {
 			try {
 				String sql = "SELECT * FROM valoraciones WHERE idvaloraciones = ?";

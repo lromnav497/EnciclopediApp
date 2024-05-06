@@ -2,6 +2,10 @@ package app.clases;
 
 import java.sql.Date;
 
+/**
+ * La clase ValoracionDO representa a una valoración en la base de datos.
+ */
+
 public class ValoracionDO {
 	private int idvaloraciones;
 	private int puntaje;
@@ -15,6 +19,17 @@ public class ValoracionDO {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor de la clase ValoracionDO.
+	 *
+	 * @param idvaloraciones El ID de la valoración.
+	 * @param puntaje El puntaje de la valoración.
+	 * @param recomendado Si la valoración es recomendada.
+	 * @param comentario El comentario de la valoración.
+	 * @param fch_publi La fecha de publicación de la valoración.
+	 * @param clientes_idclientes El ID del cliente que hizo la valoración.
+	 */
+	
 	public ValoracionDO(int idvaloraciones, int puntaje, boolean recomendado, String comentario, Date fch_publi,
 			int clientes_idclientes) {
 		super();

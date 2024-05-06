@@ -2,6 +2,10 @@ package app.clases;
 
 import java.sql.Date;
 
+/**
+ * La clase ClienteDO representa a un cliente en la base de datos.
+ */
+
 public class ClienteDO {
 	private int idclientes;
 	private String nombre;
@@ -18,6 +22,20 @@ public class ClienteDO {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Constructor de la clase ClienteDO.
+	 *
+	 * @param idclientes El ID del cliente.
+	 * @param nombre El nombre del cliente.
+	 * @param apellido El apellido del cliente.
+	 * @param fch_nac La fecha de nacimiento del cliente.
+	 * @param correo El correo electrónico del cliente.
+	 * @param telefono El número de teléfono del cliente.
+	 * @param password La contraseña del cliente.
+	 * @param afiliado Si el cliente está afiliado.
+	 * @param acept_publi Si el cliente acepta publicidad.
+	 */
+	
 	public ClienteDO(int idclientes, String nombre, String apellido, Date fch_nac, String correo, String telefono,
 			String password, boolean afiliado, boolean acept_publi) {
 		super();

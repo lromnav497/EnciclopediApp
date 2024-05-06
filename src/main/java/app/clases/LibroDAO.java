@@ -8,9 +8,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * La clase LibroDAO se utiliza para interactuar con la tabla de libros en la base de datos.
+ */
+
 public class LibroDAO {
 
-	// Eliminar libro
+	/**
+	 * Este método elimina un libro de la base de datos.
+	 *
+	 * @param id El ID del libro.
+	 * @param con La conexión a la base de datos.
+	 * @return 0 si la operación fue exitosa, -1 en caso de error.
+	 */
+	
 	public static int removeLibro(int id, Connection con) {
 		try {
 			String sql = "DELETE FROM libros WHERE idlibros = ?";
@@ -24,7 +35,14 @@ public class LibroDAO {
 		}
 	}
 
-	// Insertar nuevos libros
+	/**
+	 * Este método inserta un nuevo libro en la base de datos.
+	 *
+	 * @param libro El objeto LibroDO que contiene los datos del libro.
+	 * @param con La conexión a la base de datos.
+	 * @return 1 si la operación fue exitosa, 0 en caso de error.
+	 */
+	
 	public static int insertLibro(LibroDO libro, Connection con) {
 		if (libro == null || libro.getNombre() == null || libro.getCategoria() == null || libro.getAutor() == null
 				|| libro.getEditorial() == null || libro.getFch_publi() == null || libro.getPrecio() == null) {
@@ -59,7 +77,14 @@ public class LibroDAO {
 		}
 	}
 
-	// Cargar todos los datos del cliente con la id
+	/**
+	 * Este método carga los datos de un libro desde la base de datos.
+	 *
+	 * @param con La conexión a la base de datos.
+	 * @param id El ID del libro.
+	 * @return Un objeto LibroDO que contiene los datos del libro, o null si no se encontró el libro.
+	 */
+	
 	public static LibroDO loadLibro(Connection con, int id) {
 		try {
 			String sql = "SELECT * FROM libros WHERE idlibros = ?";
@@ -79,6 +104,13 @@ public class LibroDAO {
 		}
 	}
 
+	/**
+	 * Este método obtiene una lista de todos los libros en la base de datos.
+	 *
+	 * @param con La conexión a la base de datos.
+	 * @return Una lista de objetos LibroDO que representan a los libros en la base de datos.
+	 */
+	
 	public static List<LibroDO> getLibros(Connection con) {
 		List<LibroDO> libros = new ArrayList<>();
 		try {

@@ -7,11 +7,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * La clase UserProperties se utiliza para guardar y cargar los detalles del usuario.
+ */
+
 public class UserProperties {
 
 	private Properties config = new Properties();
 	String homeDir = System.getProperty("user.home");
 
+	/**
+	 * Este método guarda los detalles del usuario en un archivo de propiedades.
+	 *
+	 * @param nombre El nombre del usuario.
+	 * @param apellido El apellido del usuario.
+	 * @param fechaNacimiento La fecha de nacimiento del usuario.
+	 * @param email El correo electrónico del usuario.
+	 * @param telefono El número de teléfono del usuario.
+	 * @param isAfiliado Si el usuario está afiliado.
+	 * @param isAceptaPublicidad Si el usuario acepta publicidad.
+	 * @param isLoggedIn Si el usuario ha iniciado sesión.
+	 * @param isdark_mode Si el usuario ha activado el modo oscuro.
+	 */
+	
 	public void saveUserDetails(String nombre, String apellido, String fechaNacimiento, String email, String telefono,
 			boolean isAfiliado, boolean isAceptaPublicidad, boolean isLoggedIn, boolean isdark_mode) {
 		config.setProperty("nombre", nombre);
@@ -33,6 +51,12 @@ public class UserProperties {
 		}
 	}
 
+	/**
+	 * Este método carga los detalles del usuario desde un archivo de propiedades.
+	 *
+	 * @return Un array de Strings con los detalles del usuario.
+	 */
+	
 	public String[] loadUserDetails() {
 		String[] datos = new String[7];
 		try {
@@ -59,10 +83,22 @@ public class UserProperties {
 		return datos;
 	}
 
+	/**
+	 * Este método verifica si el usuario ha iniciado sesión.
+	 *
+	 * @return true si el usuario ha iniciado sesión, false en caso contrario.
+	 */
+	
 	public boolean isLoggedIn() {
 		return Boolean.parseBoolean(config.getProperty("isLoggedIn", "false"));
 	}
 
+	/**
+	 * Este método verifica si el usuario ha activado el modo oscuro.
+	 *
+	 * @return true si el usuario ha activado el modo oscuro, false en caso contrario.
+	 */
+	
 	public boolean isdark_mode() {
 		return Boolean.parseBoolean(config.getProperty("isdark_mode", "false"));
 	}
