@@ -29,10 +29,26 @@ import javafx.scene.web.WebView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Clase principal de la aplicación EnciclopediApp.
+ * 
+ * @author Luis Carlos Romero Y Francisco Audino
+ */
+
 public class App_principal {
 
+	 /**
+     * Propiedades del usuario.
+     * @param userProperties instancia de UserProperties para gestionar las propiedades del usuario.
+     */
+	
 	private UserProperties userProperties = new UserProperties();
 
+	/**
+     * Muestra la ventana principal de la aplicación.
+     * @throws SQLException si ocurre un error al obtener los libros de la base de datos.
+     */
+	
 	public void showMainWindow() {
 		// Conectar con la bd
 		Connection con = ConectarBD.conectarBD();
@@ -87,7 +103,6 @@ public class App_principal {
 		MenuItem soporteItem = new MenuItem("Soporte");
 		soporteItem.setOnAction(e -> {
 			try {
-				// Abre la ventana principal
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("emailform.fxml"));
 				Parent root2 = fxmlLoader.load();
 				Stage newstage = new Stage();
@@ -157,8 +172,7 @@ public class App_principal {
 
 		VBox detallesPanel = new VBox();
 		detallesPanel.getChildren().add(new Label("Detalles"));
-		// Aquí puedes agregar los detalles del libro seleccionado
-
+		
 		// Dividir la ventana en dos
 		SplitPane splitPane = new SplitPane();
 		splitPane.getItems().addAll(root, detallesPanel);

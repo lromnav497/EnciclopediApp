@@ -35,7 +35,6 @@ public class EmailFormController {
         // Cargar el archivo de propiedades
 		String[] propiedas = userProperties.loadUserDetails();
 
-		System.out.println(propiedas[3]);
 		// Establecer los valores por defecto de los TextField
 		textcorreo.setText(propiedas[3]);
     }
